@@ -1,7 +1,7 @@
 public interface Visitor {
-    public void visitAttack(Enemy enemy);
-    public void visitAttack(Player player);
-/*    public void visitDeath(Enemy enemy);
-    public void visitDeath(Player player);*/
+    public void visit(Enemy enemy);
+    public void visit(Player player);
+    public boolean visit(Empty e);
+    public boolean visit(Wall w);
 
 }

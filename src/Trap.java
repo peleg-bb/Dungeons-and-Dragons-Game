@@ -21,7 +21,7 @@ public class Trap extends Enemy{
             tickCount = tickCount + 1;
         }
         if(this.position.range(p.position)<2){
-            attack(p);
+            interact(p);
         }
     }
 }

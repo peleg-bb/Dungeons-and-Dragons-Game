@@ -18,6 +18,7 @@ public abstract class Player extends Unit{
     public int getExprience(){
         return this.exprience;
     }
+
     public void levelUp(){
         this.exprience = this.exprience - 50*this.level;
         this.level++; //ask
@@ -25,30 +26,23 @@ public abstract class Player extends Unit{
         this.attackPoints = this.attackPoints + 4*this.level;
         this.defensePoint = this.defensePoint + this.level;
     }
-    public void acceptAttack(Visitor v){
-        v.visitAttack(this);
-    }
 
-    public void visitAttack(Player p){
-        return;
+    public void accept(Visitor v){
+        v.visit(this);
     }
+    public void visit(Player p){return;}
+    public void visit(Enemy e){ combat(e);}
+    public boolean visit(Empty e){return true;}
+    public boolean visit(Wall w){return false;}
 
 
-    public void visitAttack(Enemy enemy){
-        int attacker = (int) (Math.random()*(attackPoints-0)) + 0;
-        int defender = (int) (Math.random()*(defensePoint-0)) + 0;
-        combat(attacker,defender,enemy);
-        if(enemy.health.getHealthAmount()<0){
-            this.position = enemy. position;//swap
-            onKill(enemy);
-        }
-    }
     public void onKill(Enemy e){
         this.exprience = this.exprience + e.getExpirience();
         e.onDeath();
     }
     public void onDeath(){
-        //end game
+        this.tile = 'X';
+        //send game is over
     }
     public abstract void onAbilityCast(List<Enemy> enemies);
     public abstract void onGameTick();

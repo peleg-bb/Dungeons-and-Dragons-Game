@@ -16,17 +16,34 @@ public abstract class Unit extends Tile implements Visitor,Visited{
         this.position = p;
     }
 
+    public void interact(Tile tile){
+        tile.accept(this);
+    }
+    public void demage(int d){
+        this.health.setHealthAmount(this.health.getHealthAmount()-d);
 
-    public void attack(Unit unit){
-         unit.acceptAttack(this);
+    }
+    public int attack(){
+        return (int) (Math.random()*(attackPoints-0)) + 0;
+    }
+    public int defence(){
+        return (int) (Math.random()*(attackPoints-0)) + 0;
+    }
+    public void combat(Unit u ){ //u is defender
+       int attackP = attack();
+       int defenseP = defence();
+       if(attackP - defenseP >0){
+           u.demage(attackP - defenseP);
+           if(u.health.getHealthAmount() <=0){
+               this.onKill();
+
+           }
+       }
     }
 
-    public void combat(int attaker, int defender, Unit u ){ //u is defender
-        if(attaker  - defender > 0){
-            u.health.setHealthPool(health.getHealthPool() - (attaker  - defender));
-        }
-        return;
-    }
+    public abstract void onKill();
+
+    public abstract void OnDeath();
 
     public class Health {
 

@@ -31,7 +31,7 @@ public class Warrior extends Player{
         }
         for(Enemy e : enemies ){///
             if(this.position.range(e.position)<3){
-                attack(e);
+                interact(e);
                 break;
             }
         }
