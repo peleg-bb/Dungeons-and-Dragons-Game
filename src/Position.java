@@ -53,4 +53,8 @@ public class Position {
         }
     }
 
+    public void setPosition(Position point) {
+        this.x = point.x;
+        this.y = point.y;
+    }
 }

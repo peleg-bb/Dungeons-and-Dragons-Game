@@ -1,4 +1,5 @@
 public abstract class Enemy extends Unit{
+
     protected int expirience;
     public Enemy(char tile, String name, int healthA, int attackPoints, int defensePoint, int expirience){
         super(tile, name, healthA, attackPoints, defensePoint);
@@ -17,11 +18,15 @@ public abstract class Enemy extends Unit{
     public void visit(Enemy e){return; }
     public boolean visit(Empty e){return true;}
     public boolean visit(Wall w){return false;}
+
+
     public void onKill(Player p){
         this.expirience = this.expirience + p.getExprience();
-        p.onDeath();
+
     }
-    public void onDeath(){
-        //delete from board
+    public void onDeath(Unit u){
+        u.onKill(this);
     }
+
+
 }

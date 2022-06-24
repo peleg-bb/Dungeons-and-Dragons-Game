@@ -1,6 +1,7 @@
 import java.util.List;
 
 public class Rogue extends Player{
+
     private final String spacialAbility = "Fan of Knives";
     private int cost;
     private int currentEnergy;

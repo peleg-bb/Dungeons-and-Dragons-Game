@@ -30,6 +30,7 @@ public abstract class Tile implements Comparable<Tile>{
         return String.valueOf(tile);
     }
 
-    public abstract void accept(Unit unit);
+
+    protected abstract void accept(Unit unit);
 }
 

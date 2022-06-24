@@ -38,11 +38,11 @@ public abstract class Player extends Unit{
 
     public void onKill(Enemy e){
         this.exprience = this.exprience + e.getExpirience();
-        e.onDeath();
+
     }
-    public void onDeath(){
+    public void onDeath(Unit u){
         this.tile = 'X';
-        //send game is over
+        u.onKill(this);
     }
     public abstract void onAbilityCast(List<Enemy> enemies);
     public abstract void onGameTick();

@@ -1,4 +1,4 @@
-public abstract class Unit extends Tile implements Visitor,Visited{
+public abstract class Unit extends Tile {
     protected String name;
     protected Health health;
     protected Position p;
@@ -29,21 +29,30 @@ public abstract class Unit extends Tile implements Visitor,Visited{
     public int defence(){
         return (int) (Math.random()*(attackPoints-0)) + 0;
     }
-    public void combat(Unit u ){ //u is defender
+
+    public void combat(Unit u){ //u is defender
        int attackP = attack();
        int defenseP = defence();
        if(attackP - defenseP >0){
            u.demage(attackP - defenseP);
            if(u.health.getHealthAmount() <=0){
-               this.onKill();
-
+               u.onDeath(this);
            }
        }
     }
 
-    public abstract void onKill();
+    public abstract void onDeath(Unit unit);
 
-    public abstract void OnDeath();
+    public abstract void onKill(Unit u);
+
+
+
+
+    public abstract void accept(Unit unit);
+    public abstract void visit(Enemy enemy);
+    public abstract void visit(Player p);
+    public abstract boolean visit(Wall wall);
+    public abstract boolean visit(Empty empty);
 
     public class Health {
 
