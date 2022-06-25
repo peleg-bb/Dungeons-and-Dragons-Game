@@ -6,13 +6,14 @@ import Backend.Tile.Unit.Unit;
 
 public abstract class Enemy extends Unit {
 
-    protected int experience;
+
     public EnemyDeathCallBack enemyDeathCallBack;
 
-    public Enemy(char tile, String name, int healthA, int attackPoints, int defensePoint, int experience){
-        super(tile, name, healthA, attackPoints, defensePoint);
-        this.experience = experience;
-    }
+    public Enemy(char tile, String name, int healthA, int attackPoints,
+                 int defensePoint, int experience){
+        super(tile, name, healthA, attackPoints, defensePoint, experience);
+
+    } // Can be deleted?
 
     public int getExperience() {
         return experience;
@@ -38,10 +39,12 @@ public abstract class Enemy extends Unit {
 
     public void onDeath(Unit u){
         enemyDeathCallBack.call();
+        this.massageCallBack.send(this.getName() + " died.");
     }
 
     public void onKill(Unit u){
-        // Send kill message
+        // send message to player that enemy has killed player
+        this.massageCallBack.send(this.getName() + " killed " + u.getName());
     }
 
 

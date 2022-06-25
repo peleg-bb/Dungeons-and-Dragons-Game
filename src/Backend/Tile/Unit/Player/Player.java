@@ -1,5 +1,5 @@
 package Backend.Tile.Unit.Player;
-
+import Backend.Interfaces.MassageCallBack;
 import Backend.Tile.Unit.Enemy.Enemy;
 import Backend.Tile.Unit.Unit;
 
@@ -7,10 +7,12 @@ import java.util.List;
 
 public abstract class Player extends Unit {
     protected int experience;
+
     protected int level;
-    public Player(String name, int healthA, int attackPoints, int defensePoint){
-        super('@', name, healthA, attackPoints, defensePoint);
-        this.experience = 0;
+    public Player(String name, int healthA, int attackPoints,
+                  int defensePoint){
+        super('@', name, healthA, attackPoints,
+                defensePoint, 0); //experience is 0 because it is a player
         this.level =1;
     }
 
@@ -45,12 +47,12 @@ public abstract class Player extends Unit {
 
     public void onKill(Unit u){
         this.experience = this.experience + u.getExperience();
-        // Send kill message
+        this.massageCallBack.send("You killed " + u.getName());
     }
     public void onDeath(Unit u){
         this.tile = 'X';
+        this.massageCallBack.send("You died");
         u.onKill(this);
-        // MessageCallBack
         // End game
     }
     public abstract void onAbilityCast(List<Enemy> enemies);

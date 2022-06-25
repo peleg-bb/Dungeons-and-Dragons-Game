@@ -32,6 +32,7 @@ public class Level {
                 e.onGameTick(p);
                 if (e.isDead()){
                     e.setEnemyDeathCallBack(()->enemies.remove(e));
+
                 }
             }
         }

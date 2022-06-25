@@ -1,5 +1,6 @@
 package Backend.Tile.Unit;
 
+import Backend.Interfaces.MassageCallBack;
 import Backend.Tile.StaticTiles.Empty;
 import Backend.Tile.Position;
 import Backend.Tile.Tile;
@@ -9,6 +10,7 @@ import Backend.Tile.StaticTiles.Wall;
 
 public abstract class Unit extends Tile {
     protected String name;
+    public MassageCallBack massageCallBack;
     protected int experience;
 
     public int getExperience() {
@@ -20,12 +22,18 @@ public abstract class Unit extends Tile {
     protected int attackPoints;
     protected int defensePoint;
 
-    public Unit(char tile, String name,int healthA, int attackPoints, int defensePoint){
+    public Unit(char tile, String name,int healthA, int attackPoints,
+                int defensePoint, int experience) {
         super(tile);
         this.name = name;
         this.health = new Health(healthA, healthA);
         this.attackPoints = attackPoints;
         this.defensePoint = defensePoint;
+        this.experience = experience;
+    }
+
+    public void setMassageCallBack(MassageCallBack massageCallBack){
+        this.massageCallBack = massageCallBack;
     }
     public void initialize( Position p){
         this.position = p;
@@ -105,6 +113,11 @@ public abstract class Unit extends Tile {
         public boolean isDead(){
             return healthAmount <= 0;
         }
+    }
+
+    //getname
+    public String getName(){
+        return name;
     }
 
 

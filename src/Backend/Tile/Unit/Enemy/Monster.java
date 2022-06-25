@@ -5,7 +5,8 @@ import Backend.Tile.Unit.Player.Player;
 public class Monster extends Enemy{
     private int visionRange;
 
-    public Monster(char tile, String name, int healthA, int attackPoints, int defensePoint, int expirience,int visionRange){
+    public Monster(char tile, String name, int healthA, int attackPoints,
+                   int defensePoint,int visionRange, int expirience){
         super(tile,name,healthA, attackPoints, defensePoint, expirience);
         this.visionRange = visionRange;
     }
