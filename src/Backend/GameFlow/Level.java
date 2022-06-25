@@ -12,6 +12,8 @@ public class Level {
     private Player p;
     private List<Enemy> enemies;
     private List<Tile> tiles;
+    private GameBoard board;
+
     private boolean gameOver;
     private boolean done;
 
@@ -21,24 +23,24 @@ public class Level {
         gameOver = false;
         done = false;
     }
-    public void GameTick(){
+    public void GameTick(char choice) {
         p.onGameTick();
-        // move()
-        if (p.isDead()){
+        move(choice);
+        if (p.isDead()) {
             gameOver = true;
+            // send game over message
+
         }
-        else{
+        else {
             for (Enemy e : enemies) {
                 e.onGameTick(p);
-                if (e.isDead()){
-                    e.setEnemyDeathCallBack(()->enemies.remove(e));
-
+                if (e.isDead()) {
+                    e.setEnemyDeathCallBack(() -> enemies.remove(e));
                 }
             }
-        }
-
-        if(enemies.isEmpty()){
-            done = true;
+            if (enemies.isEmpty()) {
+                done = true;
+            }
         }
     }
 
@@ -48,51 +50,45 @@ public class Level {
         int y = p.getPosition().getY();
         Position point = new Position(x,y);
         if(move == 'w'){
-            p.position.setY(y+1);
+            p.visit(board.getTile(x,y+1));
         }
         if(move == 's'){
-            p.position.setY(y-1);
+            p.visit(board.getTile(x,y-1));
         }
         else if(move == 'd'){
-            p.position.setX(x+1);
+            p.visit(board.getTile(x+1,y));
         }
-        else if(move == 'w'){
-            p.position.setX(x-1);
+        else if(move == 'a'){
+            p.visit(board.getTile(x-1,y));
         }
         else if(move == 'c'){
             p.onAbilityCast(enemies);
         }
-        if(checkPoint()){
-            p.position.setPosition(point);
-        }
-        else{
-            FightEnemy();
-        }
     }
 
-    private void FightEnemy() {
-        for(Enemy e : enemies){
-            if(e.position.equals(p.position)){
-                p.interact(e);
-                if(e.isDead()){
-                    //remove from board:)
-                }
+//    private void FightEnemy() { // I believe we should use visitor pattern instead of this method
+//        for(Enemy e : enemies){
+//            if(e.position.equals(p.position)){
+//                p.interact(e);
+//                if(e.isDead()){
+//                    //remove from board:)
+//                }
+//
+//            }
+//        }
+//    }
 
-            }
-        }
-    }
-
-    public boolean checkPoint(){
-        for(Tile t : tiles){
-            //I want to know if it's a wall or not
-            if(t.position.equals(p.position)){
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
-
-        return false;
-    }
+//    public boolean checkPoint(){ // I believe we should use visitor pattern instead of this method
+//        for(Tile t : tiles){
+//            //I want to know if it's a wall or not
+//            if(t.position.equals(p.position)){
+//                return true;
+//            }
+//            else{
+//                return false;
+//            }
+//        }
+//
+//        return false;
+//    }
 }

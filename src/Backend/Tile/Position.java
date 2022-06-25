@@ -59,4 +59,20 @@ public class Position {
         this.x = point.x;
         this.y = point.y;
     }
+
+    public void moveRight(){
+        x++;
+    }
+
+    public void moveLeft(){
+        x--;
+    }
+
+    public void moveUp(){
+        y++;
+    }
+
+    public void moveDown(){
+        y--;
+    }
 }
