@@ -32,7 +32,7 @@ public abstract class Unit extends Tile {
         this.experience = experience;
     }
 
-    public void setMassageCallBack(MassageCallBack massageCallBack){
+    public void setMassageCallBack(MassageCallBack massageCallBack) {
         this.massageCallBack = massageCallBack;
     }
     public void initialize( Position p){
@@ -49,7 +49,7 @@ public abstract class Unit extends Tile {
         return (int) (Math.random()*(attackPoints-0)) + 0;
     }
     public int defend(){
-        return (int) (Math.random()*(attackPoints-0)) + 0;
+        return (int) (Math.random()*(defensePoint-0)) + 0;
     }
 
     public void combat(Unit u){ //u is defender
@@ -57,8 +57,15 @@ public abstract class Unit extends Tile {
        int defenseP = defend();
        if(attackP - defenseP > 0){
            u.damage(attackP - defenseP);
-           this.massageCallBack.send(this.name + " attacked " + u.name +
-                   " and did " + (attackP - defenseP) + " damage");
+
+           String msg = this.name + " attacked " + u.name +
+                   " and did " + (attackP - defenseP) + " damage";
+           this.setMassageCallBack(new MassageCallBack() {
+               @Override
+               public void send(String m) {
+                   massageCallBack.send(msg);
+               }
+           });
            if(u.isDead()){
                u.onDeath(this);
                this.onKill(u);

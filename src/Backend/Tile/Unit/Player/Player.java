@@ -15,7 +15,7 @@ public abstract class Player extends Unit {
                   int defensePoint){
         super('@', name, healthA, attackPoints,
                 defensePoint, 0); //experience is 0 because it is a player
-        this.level =1;
+        this.level = 1;
     }
 
     public void setExperience() {
@@ -30,7 +30,7 @@ public abstract class Player extends Unit {
 
     public void levelUp(){
         this.experience = this.experience - 50*this.level;
-        this.level++; //ask
+        this.level++; // ask
         health.setValues(this.health.getHealthPool(),this.health.getHealthPool()+10*level);
         this.attackPoints = this.attackPoints + 4*this.level;
         this.defensePoint = this.defensePoint + this.level;
@@ -52,7 +52,8 @@ public abstract class Player extends Unit {
 
     public void onKill(Unit u){
         this.experience = this.experience + u.getExperience();
-        this.massageCallBack.send("You killed " + u.getName());
+        this.massageCallBack.send("You killed " + u.getName()); // Needs to be instantiated and I hate it
+        this.setPosition(u.getPosition());
     }
     public void onDeath(Unit u){
         this.tile = 'X';
