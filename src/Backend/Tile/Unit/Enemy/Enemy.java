@@ -1,15 +1,19 @@
 package Backend.Tile.Unit.Enemy;
 
+import Backend.Interfaces.EnemyDeathCallBack;
 import Backend.Tile.Unit.Player.Player;
 import Backend.Tile.Unit.Unit;
 
 public abstract class Enemy extends Unit {
 
-    protected int experience;
-    public Enemy(char tile, String name, int healthA, int attackPoints, int defensePoint, int experience){
-        super(tile, name, healthA, attackPoints, defensePoint);
-        this.experience = experience;
-    }
+
+    public EnemyDeathCallBack enemyDeathCallBack;
+
+    public Enemy(char tile, String name, int healthA, int attackPoints,
+                 int defensePoint, int experience){
+        super(tile, name, healthA, attackPoints, defensePoint, experience);
+
+    } // Can be deleted?
 
     public int getExperience() {
         return experience;
@@ -27,11 +31,21 @@ public abstract class Enemy extends Unit {
 //    public void onKill(Player p){ //Not necessary
 //        this.experience = this.experience + p.getExperience();
 //    }
-    public void onDeath(Unit u){
-        u.onKill(this);
+
+    // set enemyDeathCallBack to a function that will be called when the enemy is dead
+    public void setEnemyDeathCallBack(EnemyDeathCallBack enemyDeathCallBack){
+        this.enemyDeathCallBack = enemyDeathCallBack;
     }
 
-    public void onKill(Unit u){}
+    public void onDeath(Unit u){
+        enemyDeathCallBack.call();
+        this.massageCallBack.send(this.getName() + " died.");
+    }
+
+    public void onKill(Unit u){
+        // send message to player that enemy has killed player
+        this.massageCallBack.send(this.getName() + " killed " + u.getName());
+    }
 
 
 
