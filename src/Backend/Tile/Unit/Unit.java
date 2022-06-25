@@ -44,7 +44,6 @@ public abstract class Unit extends Tile {
     }
     public void damage(int d){
         this.health.setHealthAmount(this.health.getHealthAmount()-d);
-
     }
     public int attack(){
         return (int) (Math.random()*(attackPoints-0)) + 0;
@@ -56,8 +55,10 @@ public abstract class Unit extends Tile {
     public void combat(Unit u){ //u is defender
        int attackP = attack();
        int defenseP = defend();
-       if(attackP - defenseP >0){
+       if(attackP - defenseP > 0){
            u.damage(attackP - defenseP);
+           this.massageCallBack.send(this.name + " attacked " + u.name +
+                   " and did " + (attackP - defenseP) + " damage");
            if(u.isDead()){
                u.onDeath(this);
                this.onKill(u);
@@ -70,18 +71,16 @@ public abstract class Unit extends Tile {
     public abstract void onKill(Unit u);
 
     public boolean isDead(){
-        return this.health.getHealthAmount() <= 0;};
+        return this.health.getHealthAmount() <= 0;
+    }
 
     public abstract void accept(Unit unit);
     public abstract void visit(Enemy enemy);
     public abstract void visit(Player p);
     public void visit(Wall wall){};
-    public void visit(Empty empty){
-        swapPositions(empty);
-    };
+    public void visit(Empty empty){ swapPositions(empty);};
 
     public class Health {
-
         protected int healthPool;
         protected int healthAmount;
         public Health(int p, int a){
@@ -109,13 +108,9 @@ public abstract class Unit extends Tile {
             return healthPool;
         }
 
-        //returns true if player is dead
-        public boolean isDead(){
-            return healthAmount <= 0;
-        }
     }
 
-    //getname
+
     public String getName(){
         return name;
     }

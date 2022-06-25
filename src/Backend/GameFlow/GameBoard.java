@@ -20,7 +20,7 @@ public class GameBoard {
         }
     }
 
-    public Tile get(int x, int y) {
+    public Tile getTile(int x, int y) {
         for(Tile t : tiles){
             if (t.getPosition().equals(new Position(x,y))){
                 return t;
@@ -41,4 +41,6 @@ public class GameBoard {
         // TODO: Implement me
         return "";
     }
+
+
 }

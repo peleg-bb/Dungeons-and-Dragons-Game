@@ -1,5 +1,7 @@
 package Backend.Tile.Unit.Player;
 import Backend.Interfaces.MassageCallBack;
+import Backend.Tile.Position;
+import Backend.Tile.Tile;
 import Backend.Tile.Unit.Enemy.Enemy;
 import Backend.Tile.Unit.Unit;
 
@@ -17,7 +19,7 @@ public abstract class Player extends Unit {
     }
 
     public void setExperience() {
-        this.experience = this.experience +1;
+        this.experience = this.experience + 1;
         if(this.experience >= 50*this.level){
             levelUp();
         }
@@ -44,6 +46,9 @@ public abstract class Player extends Unit {
             this.onDeath(e);
         }
     }
+    public void visit(Tile t){
+        t.accept(this);
+    }
 
     public void onKill(Unit u){
         this.experience = this.experience + u.getExperience();
@@ -59,7 +64,30 @@ public abstract class Player extends Unit {
 
     public void onGameTick(){
         this.setExperience();
-    };
+    }
+
+    public void move(char move, List<Enemy> enemies){
+        int x = this.getPosition().getX();
+        int y = this.getPosition().getY();
+        Position point = new Position(x,y);
+        if(move == 'w'){
+            this.position.moveUp();
+        }
+        if(move == 's'){
+            this.position.moveDown();
+        }
+        else if(move == 'd'){
+            this.position.moveRight();
+        }
+        else if(move == 'w'){
+            this.position.moveLeft();
+        }
+        else if(move == 'c'){
+            this.onAbilityCast(enemies);
+        }
+
+
+    }
 
 
 }

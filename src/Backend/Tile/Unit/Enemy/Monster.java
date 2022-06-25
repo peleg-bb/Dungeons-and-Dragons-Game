@@ -35,7 +35,7 @@ public class Monster extends Enemy{
         else{
             int move = (int) (Math.random()*(4-0)) + 0;
             switch(move){
-                case 0:break;
+                case 0: break;
                 case 1: position.setX(position.getX()-1); break;
                 case 2 : position.setX(position.getX()+1); break;
                 case 3 : position.setY(position.getY()+1); break;
