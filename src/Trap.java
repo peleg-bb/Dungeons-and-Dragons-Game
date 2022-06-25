@@ -12,7 +12,7 @@ public class Trap extends Enemy{
     }
 
     @Override
-    public void onEnemyTurn(Player p) {
+    public void onGameTick(Player p) {
         visible = (tickCount<visibilityTime);
         if(tickCount == (visibilityTime+invisibilityTime)){
             tickCount = 0;
@@ -24,4 +24,5 @@ public class Trap extends Enemy{
             interact(p);
         }
     }
+
 }

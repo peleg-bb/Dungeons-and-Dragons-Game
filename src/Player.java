@@ -27,23 +27,31 @@ public abstract class Player extends Unit{
         this.defensePoint = this.defensePoint + this.level;
     }
 
-    public void accept(Visitor v){
-        v.visit(this);
+    public void accept(Unit u){
+        u.visit(this);
     }
-    public void visit(Player p){return;}
-    public void visit(Enemy e){ combat(e);}
-    public boolean visit(Empty e){return true;}
-    public boolean visit(Wall w){return false;}
+    public void visit(Player p){}
+    public void visit(Enemy e){
+        super.combat(e);
+        if (this.isDead()){
+            this.onDeath(e);
+        }
+    }
 
-
-    public void onKill(Enemy e){
-        this.experience = this.experience + e.getExperience();
+    public void onKill(Unit u){
+        this.experience = this.experience + u.getExperience();
 
     }
     public void onDeath(Unit u){
         this.tile = 'X';
         u.onKill(this);
+        // MessageCallBack
     }
     public abstract void onAbilityCast(List<Enemy> enemies);
-    public abstract void onGameTick();
+
+    public void onGameTick(){
+        this.setExperience();
+    };
+
+
 }

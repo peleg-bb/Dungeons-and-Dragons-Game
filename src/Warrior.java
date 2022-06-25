@@ -17,7 +17,6 @@ public class Warrior extends Player{
         this.attackPoints = this.attackPoints +2*this.level;
         this.attackPoints = this.defensePoint +level;
     }
-    @Override
     public void onGameTick(){
         this.remainingCoolDown = this.remainingCoolDown-1;
     }
@@ -38,4 +37,18 @@ public class Warrior extends Player{
     }
 
 
+    @Override
+    public void onKill(Unit u) {
+
+    }
+
+    @Override
+    public boolean isDead() {
+        return false;
+    }
+
+    @Override
+    public void accept(Unit unit) {
+
+    }
 }

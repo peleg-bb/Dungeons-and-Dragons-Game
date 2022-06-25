@@ -32,5 +32,12 @@ public abstract class Tile implements Comparable<Tile>{
 
 
     protected abstract void accept(Unit unit);
+
+    // swaps positions of two tiles
+    public void swapPositions(Tile tile){
+        Position temp = this.position;
+        this.position = tile.getPosition();
+        tile.setPosition(temp);
+    }
 }
 

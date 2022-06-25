@@ -1,5 +1,11 @@
 public abstract class Unit extends Tile {
     protected String name;
+    protected int experience;
+
+    public int getExperience() {
+        return experience;
+    }
+
     protected Health health;
     protected Position p;
     protected int attackPoints;
@@ -45,13 +51,16 @@ public abstract class Unit extends Tile {
 
     public abstract void onKill(Unit u);
 
-    public abstract boolean isDead();
+    public boolean isDead(){
+        return this.health.getHealthAmount() <= 0;};
 
     public abstract void accept(Unit unit);
     public abstract void visit(Enemy enemy);
     public abstract void visit(Player p);
-    public abstract boolean visit(Wall wall);
-    public abstract boolean visit(Empty empty);
+    public void visit(Wall wall){};
+    public void visit(Empty empty){
+        swapPositions(empty);
+    };
 
     public class Health {
 
@@ -87,4 +96,6 @@ public abstract class Unit extends Tile {
             return healthAmount <= 0;
         }
     }
+
+
 }

@@ -9,24 +9,25 @@ public abstract class Enemy extends Unit{
     public int getExperience() {
         return experience;
     }
-    public abstract void onEnemyTurn(Player p);
+    public abstract void onGameTick(Player p);
 
-    public void accept(Visitor v){
-        v.visit(this);
+    public void accept(Player p){
+        p.visit(this);
     }
+
+    public void accept(Unit u){}
     public void visit(Player p){combat(p);}
-    public void visit(Enemy e){return; }
-    public boolean visit(Empty e){return true;}
-    public boolean visit(Wall w){return false;}
+    public void visit(Enemy e){ }
 
-
-    public void onKill(Player p){
-        this.experience = this.experience + p.getExperience();
-
-    }
+//    public void onKill(Player p){ //Not necessary
+//        this.experience = this.experience + p.getExperience();
+//    }
     public void onDeath(Unit u){
         u.onKill(this);
     }
+
+    public void onKill(Unit u){}
+
 
 
 }
