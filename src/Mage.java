@@ -29,6 +29,7 @@ public class Mage extends Player{
     }
     @Override
     public void onGameTick(){
+        super.onGameTick();
         this.currentMana = Math.min(this.manaPool, this.currentMana + level);
     }
 
@@ -53,4 +54,6 @@ public class Mage extends Player{
         }
     }
 
-}
+
+    }
+

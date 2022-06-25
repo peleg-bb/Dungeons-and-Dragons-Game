@@ -5,7 +5,7 @@ public class Monster extends Enemy{
         super(tile,name,healthA, attackPoints, defensePoint, expirience);
         this.visionRange = visionRange;
     }
-    public void onEnemyTurn(Player p){
+    public void onGameTick(Player p){
         if(this.position.range(p.position)<visionRange){
             int dx = this.position.getX()-p.position.getX();
             int dy = this.position.getY()-p.position.getY();
@@ -17,6 +17,7 @@ public class Monster extends Enemy{
                     position.setX(position.getX()+1);
                 }
             }
+
             else{
                 if(dy>0){
                     position.setY(position.getY()+1);
