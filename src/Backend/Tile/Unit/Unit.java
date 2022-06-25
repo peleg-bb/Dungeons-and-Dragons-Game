@@ -50,8 +50,9 @@ public abstract class Unit extends Tile {
        int defenseP = defend();
        if(attackP - defenseP >0){
            u.damage(attackP - defenseP);
-           if(u.health.getHealthAmount() <=0){
+           if(u.isDead()){
                u.onDeath(this);
+               this.onKill(u);
            }
        }
     }

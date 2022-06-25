@@ -23,12 +23,16 @@ public class Level {
     }
     public void GameTick(){
         p.onGameTick();
+        // move()
         if (p.isDead()){
             gameOver = true;
         }
         else{
             for (Enemy e : enemies) {
                 e.onGameTick(p);
+                if (e.isDead()){
+                    e.setEnemyDeathCallBack(()->enemies.remove(e));
+                }
             }
         }
 
@@ -79,15 +83,15 @@ public class Level {
 
     public boolean checkPoint(){
         for(Tile t : tiles){
-//            if(p.interact(t)){ //I want to know if it's a wall or not
-//                if(t.position.equals(p.position)){
-//                    return true;
-//                }
-//                else{
-//                    return false;
-//                }
-//            }
-       }
+            //I want to know if it's a wall or not
+            if(t.position.equals(p.position)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
         return false;
     }
 }

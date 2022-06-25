@@ -40,20 +40,4 @@ public class Warrior extends Player{
             }
         }
     }
-
-
-    @Override
-    public void onKill(Unit u) {
-
-    }
-
-    @Override
-    public boolean isDead() {
-        return false;
-    }
-
-    @Override
-    public void accept(Unit unit) {
-
-    }
 }

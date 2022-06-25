@@ -45,12 +45,13 @@ public abstract class Player extends Unit {
 
     public void onKill(Unit u){
         this.experience = this.experience + u.getExperience();
-
+        // Send kill message
     }
     public void onDeath(Unit u){
         this.tile = 'X';
         u.onKill(this);
         // MessageCallBack
+        // End game
     }
     public abstract void onAbilityCast(List<Enemy> enemies);
 
