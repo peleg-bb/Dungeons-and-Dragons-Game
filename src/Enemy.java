@@ -1,13 +1,13 @@
 public abstract class Enemy extends Unit{
 
-    protected int expirience;
-    public Enemy(char tile, String name, int healthA, int attackPoints, int defensePoint, int expirience){
+    protected int experience;
+    public Enemy(char tile, String name, int healthA, int attackPoints, int defensePoint, int experience){
         super(tile, name, healthA, attackPoints, defensePoint);
-        this.expirience = expirience;
+        this.experience = experience;
     }
 
-    public int getExpirience() {
-        return expirience;
+    public int getExperience() {
+        return experience;
     }
     public abstract void onEnemyTurn(Player p);
 
@@ -21,7 +21,7 @@ public abstract class Enemy extends Unit{
 
 
     public void onKill(Player p){
-        this.expirience = this.expirience + p.getExprience();
+        this.experience = this.experience + p.getExperience();
 
     }
     public void onDeath(Unit u){

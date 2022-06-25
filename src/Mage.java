@@ -7,17 +7,17 @@ public class Mage extends Player{
     private int manaCost;
     private int spellPower;
     private int hitsCount;
-    private int abilityrange;
+    private int abilityRange;
     private final String spacial_ability = "Blizzard";
 
-    //there are fields i am not sure that are suppose to be in the Constructor
+    //there are fields which I am not sure are supposed to be in the Constructor
     private Mage(char tile, String name, int healthA, int attackPoints, int defensePoint,int manaPool, int manaCost, int spellPower, int hitsCount, int abilityRange){
         super(name, healthA, attackPoints, defensePoint);
         this.manaPool = manaPool;
         this.currentMana = this.manaPool/4;
         this.manaCost = manaCost;
         this.spellPower = spellPower;
-        this.abilityrange = abilityRange;
+        this.abilityRange = abilityRange;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class Mage extends Player{
         int hits = 0 ;
         List<Enemy> enemy  = new ArrayList<>();
         for(Enemy e : enemies){
-            if(position.range(e.position) < abilityrange){
+            if(position.range(e.position) < abilityRange){
                 enemy.add(e);
             }
         }

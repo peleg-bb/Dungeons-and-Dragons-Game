@@ -2,14 +2,14 @@ import java.util.List;
 
 public class Level {
     private Player p;
-    private List<Enemy> enemy;
-    private List<Tile> tile;
+    private List<Enemy> enemies;
+    private List<Tile> tiles;
     private boolean gameOver;
     private boolean done;
 
     public Level(Player p, List<Enemy> t ){
         this.p = p;
-        this.enemy = t;
+        this.enemies = t;
         gameOver = false;
         done = false;
     }
@@ -19,11 +19,11 @@ public class Level {
         }
         else{
             p.onGameTick();
-            for (Enemy e : enemy) {
+            for (Enemy e : enemies) {
                 e.onEnemyTurn(p);
             }
         }
-        if(enemy.isEmpty()){
+        if(enemies.isEmpty()){
             done = true;
         }
     }
@@ -44,7 +44,7 @@ public class Level {
             p.position.setX(x-1);
         }
         else if(move == 'c'){
-            p.onAbilityCast(enemy);
+            p.onAbilityCast(enemies);
         }
         if(checkPoint()){
             p.position.setPosition(point);
@@ -55,7 +55,7 @@ public class Level {
     }
 
     private void FightEnemy() {
-        for(Enemy e : enemy){
+        for(Enemy e : enemies){
             if(e.position.equals(p.position)){
                 p.interact(e);
                 if(e.isDead()){
@@ -67,8 +67,8 @@ public class Level {
     }
 
     public boolean checkPoint(){
-        for(Tile t : tile){
-            if(p.interact(t)){ //I want to know if its a wall or not
+        for(Tile t : tiles){
+            if(p.interact(t)){ //I want to know if it's a wall or not
                 if(t.position.equals(p.position)){
                     return true;
                 }

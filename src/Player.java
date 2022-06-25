@@ -1,26 +1,26 @@
 import java.util.List;
 
 public abstract class Player extends Unit{
-    protected int exprience;
+    protected int experience;
     protected int level;
     public Player(String name, int healthA, int attackPoints, int defensePoint){
         super('@', name, healthA, attackPoints, defensePoint);
-        this.exprience = 0;
+        this.experience = 0;
         this.level =1;
     }
 
-    public void setExprience() {
-        this.exprience = this.exprience +1;
-        if(this.exprience>= 50*this.level){
+    public void setExperience() {
+        this.experience = this.experience +1;
+        if(this.experience >= 50*this.level){
             levelUp();
         }
     }
-    public int getExprience(){
-        return this.exprience;
+    public int getExperience(){
+        return this.experience;
     }
 
     public void levelUp(){
-        this.exprience = this.exprience - 50*this.level;
+        this.experience = this.experience - 50*this.level;
         this.level++; //ask
         health.setValues(this.health.getHealthPool(),this.health.getHealthPool()+10*level);
         this.attackPoints = this.attackPoints + 4*this.level;
@@ -37,7 +37,7 @@ public abstract class Player extends Unit{
 
 
     public void onKill(Enemy e){
-        this.exprience = this.exprience + e.getExpirience();
+        this.experience = this.experience + e.getExperience();
 
     }
     public void onDeath(Unit u){

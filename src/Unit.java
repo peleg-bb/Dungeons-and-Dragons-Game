@@ -19,22 +19,22 @@ public abstract class Unit extends Tile {
     public void interact(Tile tile){
         tile.accept(this);
     }
-    public void demage(int d){
+    public void damage(int d){
         this.health.setHealthAmount(this.health.getHealthAmount()-d);
 
     }
     public int attack(){
         return (int) (Math.random()*(attackPoints-0)) + 0;
     }
-    public int defence(){
+    public int defend(){
         return (int) (Math.random()*(attackPoints-0)) + 0;
     }
 
     public void combat(Unit u){ //u is defender
        int attackP = attack();
-       int defenseP = defence();
+       int defenseP = defend();
        if(attackP - defenseP >0){
-           u.demage(attackP - defenseP);
+           u.damage(attackP - defenseP);
            if(u.health.getHealthAmount() <=0){
                u.onDeath(this);
            }
@@ -45,8 +45,7 @@ public abstract class Unit extends Tile {
 
     public abstract void onKill(Unit u);
 
-
-
+    public abstract boolean isDead();
 
     public abstract void accept(Unit unit);
     public abstract void visit(Enemy enemy);
@@ -81,6 +80,11 @@ public abstract class Unit extends Tile {
 
         public int getHealthPool() {
             return healthPool;
+        }
+
+        //returns true if player is dead
+        public boolean isDead(){
+            return healthAmount <= 0;
         }
     }
 }
