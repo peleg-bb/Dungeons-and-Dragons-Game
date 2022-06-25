@@ -15,7 +15,8 @@ public class Mage extends Player{
     private final String spacial_ability = "Blizzard";
 
     //there are fields which I am not sure are supposed to be in the Constructor
-    private Mage(char tile, String name, int healthA, int attackPoints, int defensePoint, int manaPool, int manaCost, int spellPower, int hitsCount, int abilityRange){
+    public Mage(char tile, String name, int healthA, int attackPoints,
+                int defensePoint, int manaPool, int manaCost, int spellPower, int hitsCount, int abilityRange){
         super(name, healthA, attackPoints, defensePoint);
         this.manaPool = manaPool;
         this.currentMana = this.manaPool/4;

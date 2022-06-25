@@ -46,7 +46,4 @@ public abstract class Enemy extends Unit {
         // send message to player that enemy has killed player
         this.massageCallBack.send(this.getName() + " killed " + u.getName());
     }
-
-
-
 }
