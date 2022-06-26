@@ -26,7 +26,7 @@ public class GameBoard {
                 return t;
             }
         }
-        throw new RuntimeException();
+        throw new RuntimeException("Attempting to access a tile which doesn't exist.");
     }
 
     public void remove(Enemy e) {
