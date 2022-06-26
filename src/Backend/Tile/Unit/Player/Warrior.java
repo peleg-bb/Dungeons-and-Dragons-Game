@@ -1,5 +1,6 @@
 package Backend.Tile.Unit.Player;
 
+import Backend.Tile.Position;
 import Backend.Tile.Unit.Enemy.Enemy;
 import Backend.Tile.Unit.Unit;
 
@@ -8,8 +9,8 @@ public class Warrior extends Player{
     private final String spacial_ability = "Avenger's Shield";
     protected int abilityCoolDown;
     protected int remainingCoolDown;
-    public Warrior(String name, int healthA, int attackPoints, int defensePoint, int coolDown){
-        super(name, healthA, attackPoints, defensePoint);
+    public Warrior(String name, Position position, int healthA, int attackPoints, int defensePoint, int coolDown){
+        super(name, position, healthA, attackPoints, defensePoint);
         this.abilityCoolDown = coolDown;
         this.remainingCoolDown =0;
     }

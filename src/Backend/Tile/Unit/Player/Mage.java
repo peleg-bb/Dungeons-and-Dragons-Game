@@ -1,5 +1,6 @@
 package Backend.Tile.Unit.Player;
 
+import Backend.Tile.Position;
 import Backend.Tile.Unit.Enemy.Enemy;
 
 import java.util.ArrayList;
@@ -15,9 +16,9 @@ public class Mage extends Player{
     private final String spacial_ability = "Blizzard";
 
     //there are fields which I am not sure are supposed to be in the Constructor
-    public Mage(String name, int healthA, int attackPoints,
+    public Mage(String name, Position position, int healthA, int attackPoints,
                 int defensePoint, int manaPool, int manaCost, int spellPower, int hitsCount, int abilityRange){
-        super(name, healthA, attackPoints, defensePoint);
+        super(name, position, healthA, attackPoints, defensePoint);
         this.manaPool = manaPool;
         this.currentMana = this.manaPool/4;
         this.manaCost = manaCost;

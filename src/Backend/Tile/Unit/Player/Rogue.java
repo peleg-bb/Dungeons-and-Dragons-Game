@@ -1,5 +1,6 @@
 package Backend.Tile.Unit.Player;
 
+import Backend.Tile.Position;
 import Backend.Tile.Unit.Enemy.Enemy;
 
 import java.util.List;
@@ -10,8 +11,8 @@ public class Rogue extends Player{
     private int cost;
     private int currentEnergy;
     private static final int maxCost = 100;
-    public Rogue(String name, int healthA, int attackPoints, int defensePoint, int cost){
-        super(name, healthA, attackPoints, defensePoint);
+    public Rogue(String name, Position position, int healthA, int attackPoints, int defensePoint, int cost){
+        super(name, position, healthA, attackPoints, defensePoint);
         this.currentEnergy = 100;
     }
 

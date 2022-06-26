@@ -1,13 +1,14 @@
 package Backend.Tile.Unit.Enemy;
 
+import Backend.Tile.Position;
 import Backend.Tile.Unit.Player.Player;
 
 public class Monster extends Enemy{
     private int visionRange;
 
-    public Monster(char tile, String name, int healthA, int attackPoints,
-                   int defensePoint,int visionRange, int expirience){
-        super(tile,name,healthA, attackPoints, defensePoint, expirience);
+    public Monster(char tile, Position position, String name, int healthA, int attackPoints,
+                   int defensePoint, int visionRange, int expirience){
+        super(tile,position, name,healthA, attackPoints, defensePoint, expirience);
         this.visionRange = visionRange;
     }
     public void onGameTick(Player p){
