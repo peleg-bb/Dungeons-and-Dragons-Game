@@ -24,7 +24,7 @@ public class PlayerTest {
 
     @org.junit.Before
     public void setUp() throws Exception {
-        mage = new Mage('@', "John", 100,
+        mage = new Mage("John", 100,
                 100, 100, 100, 20, 20, 2, 1);
 
         trap = new Trap('T', "Trap", 1,
