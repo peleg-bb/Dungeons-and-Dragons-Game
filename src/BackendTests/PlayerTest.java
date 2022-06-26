@@ -24,14 +24,14 @@ public class PlayerTest {
 
     @org.junit.Before
     public void setUp() throws Exception {
-        mage = new Mage("John", 100,
+        mage = new Mage("John", new Position(3, 3), 100,
                 100, 100, 100, 20, 20, 2, 1);
 
-        trap = new Trap('T', "Trap", 1,
+        trap = new Trap('T', new Position(1, 1), "Trap", 1,
                 10, 1, 10, 1, 1);
-        wall = new Wall();
-        empty = new Empty();
-        monster = new Monster('M', "Monster", 10000,
+        wall = new Wall(new Position(0, 3));
+        empty = new Empty(new Position(0, 4));
+        monster = new Monster('M', new Position(2, 1), "Monster", 10000,
                 1000, 1000, 100, 100);
         enemies = null;
     }

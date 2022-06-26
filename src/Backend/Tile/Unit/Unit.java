@@ -22,9 +22,9 @@ public abstract class Unit extends Tile {
     protected int attackPoints;
     protected int defensePoint;
 
-    public Unit(char tile, String name,int healthA, int attackPoints,
+    public Unit(char tile, Position position, String name,int healthA, int attackPoints,
                 int defensePoint, int experience) {
-        super(tile);
+        super(tile, position);
         this.name = name;
         this.health = new Health(healthA, healthA);
         this.attackPoints = attackPoints;

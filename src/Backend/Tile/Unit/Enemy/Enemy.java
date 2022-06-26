@@ -1,6 +1,7 @@
 package Backend.Tile.Unit.Enemy;
 
 import Backend.Interfaces.EnemyDeathCallBack;
+import Backend.Tile.Position;
 import Backend.Tile.Unit.Player.Player;
 import Backend.Tile.Unit.Unit;
 
@@ -9,9 +10,9 @@ public abstract class Enemy extends Unit {
 
     public EnemyDeathCallBack enemyDeathCallBack;
 
-    public Enemy(char tile, String name, int healthA, int attackPoints,
+    public Enemy(char tile, Position position, String name, int healthA, int attackPoints,
                  int defensePoint, int experience){
-        super(tile, name, healthA, attackPoints, defensePoint, experience);
+        super(tile, position, name, healthA, attackPoints, defensePoint, experience);
 
     } // Can be deleted?
 

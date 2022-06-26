@@ -1,5 +1,6 @@
 package Backend.Tile.Unit.Enemy;
 
+import Backend.Tile.Position;
 import Backend.Tile.Unit.Player.Player;
 
 public class Trap extends Enemy{
@@ -7,9 +8,9 @@ public class Trap extends Enemy{
     private int invisibilityTime;
     private int tickCount;
     private boolean visible;
-    public Trap(char tile, String name,  int healthA, int attackPoints, int defensePoint,
+    public Trap(char tile, Position position, String name, int healthA, int attackPoints, int defensePoint,
                 int experience, int visibilityTime, int invisibilityTime){
-        super(tile, name, healthA, attackPoints, defensePoint, experience);
+        super(tile, position, name, healthA, attackPoints, defensePoint, experience);
         this.visibilityTime = visibilityTime;
         this.invisibilityTime = invisibilityTime;
         this.tickCount = 0;

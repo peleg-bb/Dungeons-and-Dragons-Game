@@ -11,9 +11,9 @@ public abstract class Player extends Unit {
     protected int experience;
 
     protected int level;
-    public Player(String name, int healthA, int attackPoints,
+    public Player(String name, Position position, int healthA , int attackPoints,
                   int defensePoint){
-        super('@', name, healthA, attackPoints,
+        super('@', position, name, healthA, attackPoints,
                 defensePoint, 0); //experience is 0 because it is a player
         this.level = 1;
     }
