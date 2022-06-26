@@ -22,11 +22,10 @@ public class GameBoard {
     private List<Tile> tiles;
     private List<Enemy> enemies;
 
-    public GameBoard(Tile[][] board){
-       tiles = new ArrayList<Tile>();
-//        for(Tile[] line : board){
-//            tiles.addAll(Arrays.asList(line));
-
+    public GameBoard(){
+        this.board = new Tile[10][10]; //change
+        this.tiles = new ArrayList<>();
+        this.enemies = new ArrayList<>();
     }
 
     public Tile getTile(int x, int y) {

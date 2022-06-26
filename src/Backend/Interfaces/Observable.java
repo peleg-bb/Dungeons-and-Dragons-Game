@@ -9,4 +9,5 @@ public interface Observable {
     void notifyObservers(char choice);
     void notifyObservers(int choice);
     void notifyObservers(List<List<String>> lines);
+    void notifyObservers(String msg);
 }
