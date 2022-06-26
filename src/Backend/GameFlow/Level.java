@@ -14,8 +14,8 @@ public class Level {
     private List<Tile> tiles;
     private GameBoard board;
 
-    private boolean gameOver;
-    private boolean done;
+    public boolean gameOver;
+    public boolean done;
 
     public Level(Player p, List<Enemy> t ){
         this.p = p;
@@ -29,7 +29,6 @@ public class Level {
         if (p.isDead()) {
             gameOver = true;
             // send game over message
-
         }
         else {
             for (Enemy e : enemies) {
