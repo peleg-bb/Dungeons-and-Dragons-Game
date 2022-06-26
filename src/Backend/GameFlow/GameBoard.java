@@ -6,7 +6,10 @@ import Backend.Tile.Position;
 import Backend.Tile.Tile;
 import Backend.Tile.Unit.Enemy.Monster;
 import Backend.Tile.Unit.Enemy.Trap;
+import Backend.Tile.Unit.Player.Mage;
 import Backend.Tile.Unit.Player.Player;
+import Backend.Tile.Unit.Player.Rogue;
+import Backend.Tile.Unit.Player.Warrior;
 import Backend.Tile.Unit.Unit;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,18 +105,47 @@ public class GameBoard {
             }
         }
     }
+
+
+    public void createPlayer(int playerChoice, Position playerPosition) {
+
+        switch (playerChoice) {
+            case 1:
+                this.player = new Warrior("Jon Snow", playerPosition, 300, 30, 4, 3);
+            case 2:
+                this.player = new Warrior("The Hound", playerPosition, 400, 20, 6, 5);
+            case 3:
+                this.player = new Mage("Melisandre", playerPosition, 100, 5, 1, 15, 300, 30, 5,6);
+            case 4:
+                this.player = new Mage("Thoros of Myr", playerPosition, 250, 25, 4, 20, 150, 20, 3, 4);
+            case 5:
+                this.player = new Rogue("Arya Stark", playerPosition, 150, 40, 2, 20);
+            case 6:
+                this.player = new Rogue("Bronn", playerPosition, 250, 35, 3, 50);
+//            case 7:
+//                this.player = new Hunter(playerPosition, "Ygritte", new Health(220), 30, 2, 6);
+        }
+
+    }
     public void remove(Enemy e) {
+        enemies.remove(e);
         tiles.remove(e);
         Position p = e.getPosition();
-        //tiles.add(new Empty());
+        board[e.getPosition().getX()][e.getPosition().getY()] = new Empty(e.getPosition());
     }
 
     @Override
     public String toString() {
-        tiles = tiles.stream().sorted().collect(Collectors.toList());
-        // TODO: Implement me
-        return "";
+        String sBoard="";
+        for (int i=0;i<board.length;i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                sBoard+=board[i][j].toString();
+            }
+            sBoard+="\n";
+        }
+        return sBoard;
     }
+
 
 
 }

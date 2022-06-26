@@ -1,5 +1,4 @@
 package Backend.GameFlow;
-
 import Backend.Tile.Position;
 import Backend.Tile.Unit.Enemy.Enemy;
 import Backend.Tile.Unit.Enemy.Monster;
@@ -8,7 +7,6 @@ import Backend.Tile.Unit.Player.Mage;
 import Backend.Tile.Unit.Player.Player;
 import Backend.Tile.Unit.Player.Rogue;
 import Backend.Tile.Unit.Player.Warrior;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +18,6 @@ public class TileFactory { // Todo : implement me properly
     private List<Supplier<Player>> playersList;
     private Map<Character, Supplier<Enemy>> enemiesMap;
     private Player selected;
-
     public TileFactory(){
         //playersList = initPlayers();
         enemiesMap = initEnemies();

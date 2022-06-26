@@ -13,7 +13,6 @@ public class Level {
     private List<Enemy> enemies;
     private List<Tile> tiles;
     private GameBoard board;
-
     public boolean gameOver;
     public boolean done;
 
