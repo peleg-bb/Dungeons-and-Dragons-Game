@@ -58,28 +58,4 @@ public class Level {
         }
     }
 }
-//    private void FightEnemy() { // I believe we should use visitor pattern instead of this method
-//        for(Enemy e : enemies){
-//            if(e.position.equals(p.position)){
-//                p.interact(e);
-//                if(e.isDead()){
-//                    //remove from board:)
-//                }
-//
-//            }
-//        }
-//    }
 
-//    public boolean checkPoint(){ // I believe we should use visitor pattern instead of this method
-//        for(Tile t : tiles){
-//            //I want to know if it's a wall or not
-//            if(t.position.equals(p.position)){
-//                return true;
-//            }
-//            else{
-//                return false;
-//            }
-//        }
-//
-//        return false;
-//    }
