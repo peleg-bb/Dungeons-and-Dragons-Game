@@ -24,7 +24,8 @@ public class UserInterface implements Observer {
         System.out.println("Available players are: ");
         int choice = UI.choosePlayer();
         // read levels from file
-        List<List<String>> levels = UI.readFiles(args);
+        //List<List<String>> levels = UI.readFiles(args);
+        List<List<String>> levels = UI.makeLevels();
         //List<List<String>> levels = ""
         new GameFlow(choice, levels, UI);
         System.out.println("Game over, Bye bye!");
@@ -109,6 +110,40 @@ public class UserInterface implements Observer {
                 levels.add(levelFiles);
 
             }
+        }
+        return levels;
+    }
+
+    // Makes List<List<String>> from String
+    private List<List<String>> makeLevels() {
+        String level = "#################################################\n" +
+                "#....s...###..........................#.........#\n" +
+                "#........#B#....##..........##........#.........#\n" +
+                "#........#......##..........##........#.........#\n" +
+                "#........#............................#.........#\n" +
+                "#........#............................#.........#\n" +
+                "#........#......##..........##........#.........#\n" +
+                "#........#......##s........k##........#.........#\n" +
+                "#........#s.................##.......k#.........#\n" +
+                "#@...........................Q.................q#\n" +
+                "#........#s.................##.......k#.........#\n" +
+                "#........#......##s........k##........#.........#\n" +
+                "#........#......##..........##........#.........#\n" +
+                "#........#............................#.........#\n" +
+                "#........#............................#.........#\n" +
+                "#........#......##..........##........#.........#\n" +
+                "#........#B#....##..........##........#.........#\n" +
+                "#....s...###..........................#.........#\n" +
+                "#################################################";
+        List<List<String>> levels = new ArrayList<List<String>>();
+        String[] lines = level.split("\n");
+        for (String line : lines) {
+            List<String> levelFiles = new ArrayList<>();
+            String[] lineFiles = line.split(" ");
+            for (String file : lineFiles) {
+                levelFiles.add(file);
+            }
+            levels.add(levelFiles);
         }
         return levels;
     }

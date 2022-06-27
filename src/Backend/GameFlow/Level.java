@@ -27,7 +27,7 @@ public class Level {
         System.out.println(board.toString()); // print board via message call back and not system.out.println
         player.onGameTick();
         move(choice);
-        if (player.isDead()) {
+        if (player.isDead()){
             player.setMassageCallBack((msg) -> gameOver = true);
         } else {
             for (Enemy e : enemies) {
@@ -44,7 +44,6 @@ public class Level {
     public void move(char move) {
         int x = player.getPosition().getX();
         int y = player.getPosition().getY();
-        Position point = new Position(x, y);
         if (move == 'w') {
             player.visit(board.getTile(x, y + 1));
         }

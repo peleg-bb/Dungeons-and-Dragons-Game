@@ -1,4 +1,6 @@
 package Backend.GameFlow;
+import Backend.Interfaces.PositionObservable;
+import Backend.Interfaces.PositionObserver;
 import Backend.Tile.StaticTiles.Empty;
 import Backend.Tile.StaticTiles.Wall;
 import Backend.Tile.Unit.Enemy.Enemy;
@@ -10,16 +12,14 @@ import Backend.Tile.Unit.Player.Mage;
 import Backend.Tile.Unit.Player.Player;
 import Backend.Tile.Unit.Player.Rogue;
 import Backend.Tile.Unit.Player.Warrior;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameBoard {
+public class GameBoard implements PositionObserver {
     private Tile[][] board;
     public Player player;
     private List<Tile> tiles;
     private List<Enemy> enemies;
-
     public GameBoard(){
         this.tiles = new ArrayList<>();
         this.enemies = new ArrayList<>();
@@ -138,6 +138,9 @@ public class GameBoard {
                 }
             }
         }
+        for (Tile t : tiles) {
+            t.addObserver(this);
+        }
     }
 
 
@@ -184,5 +187,10 @@ public class GameBoard {
     }
 
 
-
+    @Override
+    public void update(Tile tile) { // Updates tile postion in board
+        tiles.remove(getTile(tile.getPosition().getX(), tile.getPosition().getY())); // Removes old tile
+        board[tile.getPosition().getX()][tile.getPosition().getY()] = tile; // Updates board with new tile
+        tiles.add(tile); // Adds new tile to list of tiles
+    }
 }

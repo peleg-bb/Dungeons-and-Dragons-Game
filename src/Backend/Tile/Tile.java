@@ -1,18 +1,25 @@
 package Backend.Tile;
 
+import Backend.Interfaces.PositionObservable;
+
+import Backend.Interfaces.PositionObserver;
 import Backend.Tile.Unit.Unit;
 
-public abstract class Tile implements Comparable<Tile>{
+import java.util.ArrayList;
+
+public abstract class Tile implements Comparable<Tile>, PositionObservable {
     protected char tile;
     public Position position;
+    protected ArrayList<PositionObserver> observers;
 
-    public Tile(char tile, Position position){
+    public Tile(char tile, Position position) {
         this.tile = tile;
         this.position = position;
+        observers = new ArrayList<PositionObserver>();
     }
-    public void initialize(int x, int y){
-        position = new Position(x,y);
-    }
+//    public void initialize(int x, int y){
+//        position = new Position(x,y);
+//    }
     public char getTile() {
         return tile;
     }
@@ -43,6 +50,26 @@ public abstract class Tile implements Comparable<Tile>{
         Position temp = this.position;
         this.position = tile.getPosition();
         tile.setPosition(temp);
+        // notify observers of position change
+        notifyObservers(this);
+        notifyObservers(tile);
     }
+
+    public void notifyObservers(Tile tile){
+        for (PositionObserver observer : observers) {
+            observer.update(tile);
+        }
+    }
+
+    public void addObserver(PositionObserver o){
+        observers.add(o);
+    }
+    public void removeObserver(PositionObserver o){
+        // do nothing
+    }
+
+
+
+
 }
 

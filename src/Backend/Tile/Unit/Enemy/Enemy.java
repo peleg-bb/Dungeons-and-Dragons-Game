@@ -27,7 +27,7 @@ public abstract class Enemy extends Unit {
 
     public void accept(Unit u){}
     public void visit(Player p){combat(p);}
-    public void visit(Enemy e){ }
+    public void visit(Enemy e){}
 
 //    public void onKill(Player p){ //Not necessary
 //        this.experience = this.experience + p.getExperience();

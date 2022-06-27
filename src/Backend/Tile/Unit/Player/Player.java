@@ -66,29 +66,29 @@ public abstract class Player extends Unit {
     public void onGameTick(){
         this.setExperience();
     }
-
-    public void move(char move, List<Enemy> enemies){
-        int x = this.getPosition().getX();
-        int y = this.getPosition().getY();
-        Position point = new Position(x,y);
-        if(move == 'w'){
-            this.position.moveUp();
-        }
-        if(move == 's'){
-            this.position.moveDown();
-        }
-        else if(move == 'd'){
-            this.position.moveRight();
-        }
-        else if(move == 'w'){
-            this.position.moveLeft();
-        }
-        else if(move == 'c'){
-            this.onAbilityCast(enemies);
-        }
-
-
-    }
+//
+//    public void move(char move, List<Enemy> enemies){ // Do not use this method
+//        int x = this.getPosition().getX();
+//        int y = this.getPosition().getY();
+//        Position point = new Position(x,y);
+//        if(move == 'w'){
+//            this.position.moveUp();
+//        }
+//        if(move == 's'){
+//            this.position.moveDown();
+//        }
+//        else if(move == 'd'){
+//            this.position.moveRight();
+//        }
+//        else if(move == 'w'){
+//            this.position.moveLeft();
+//        }
+//        else if(move == 'c'){
+//            this.onAbilityCast(enemies);
+//        }
+//
+//
+//    }
 
 
 }
