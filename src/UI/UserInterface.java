@@ -1,13 +1,14 @@
 package UI;
 
-import Backend.GameFlow.Level;
+import Backend.GameFlow.GameFlow;
 import Backend.GameFlow.TileFactory;
 import Backend.Interfaces.Observer;
-import Backend.Tile.Unit.Player.Player;
-import Backend.Tile.Unit.Player.Rogue;
 
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 
 public class UserInterface implements Observer {
     TileFactory tileFactory;
@@ -22,7 +23,11 @@ public class UserInterface implements Observer {
         System.out.println("Welcome to Dungeons and dragons!");
         System.out.println("Available players are: ");
         int choice = UI.choosePlayer();
-        GameFlow game = new GameFlow(choice);
+        // read levels from file
+        List<List<String>> levels = UI.readFiles(args);
+        //List<List<String>> levels = ""
+        new GameFlow(choice, levels, UI);
+        System.out.println("Game over, Bye bye!");
     }
 
     // Let user choose a player
@@ -46,16 +51,15 @@ public class UserInterface implements Observer {
             try {
                 int choice = reader.nextInt();
                 while (choice < 1 || choice > 7) {
-                    System.out.println("You didn't choose a player. Select player: ");
+                    System.out.println("You must choose a number between 1-7. Select player: ");
                     choice = reader.nextInt();
-                    return choice;
                 }
+                return choice;
             } catch (Exception e) {
-                System.out.println("You didn't choose a player. Select player: ");
+                System.out.println("You must choose a number between 1-7. Select player: ");
                 reader.nextLine();
             }
         }
-
     }
 
     public static char acceptInput() {
@@ -80,6 +84,32 @@ public class UserInterface implements Observer {
 
     @Override
     public void sendMessage(String msg) {
+        System.out.println(msg);
+    }
 
+    // Reads file and returns a list of lines
+    private List<List<String>> readFiles(String[] args) {
+        File[] files = new File(args[0]).listFiles(); // read from levels path
+        List<List<String>> levels = new ArrayList<List<String>>();
+        for (File file : files) {
+            if (file.isFile() && file.getName().indexOf("level")!=-1) { //read each file
+                List<String> levelFiles = new ArrayList<>();
+                try {
+                    BufferedReader reader = new BufferedReader(new FileReader(file));
+                    String next;
+                    while ((next = reader.readLine()) != null) {
+                        levelFiles.add(next);
+                    }
+                } catch (FileNotFoundException e) {
+                    System.out.println("File not found");
+                } catch (IOException ex) {
+                    System.out.println(ex.getMessage() + "\n" +
+                            ex.getStackTrace());
+                }
+                levels.add(levelFiles);
+
+            }
+        }
+        return levels;
     }
 }

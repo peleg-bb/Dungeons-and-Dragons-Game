@@ -8,6 +8,7 @@ public abstract class Tile implements Comparable<Tile>{
 
     public Tile(char tile, Position position){
         this.tile = tile;
+        this.position = position;
     }
     public void initialize(int x, int y){
         position = new Position(x,y);
