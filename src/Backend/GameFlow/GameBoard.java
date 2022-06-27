@@ -23,7 +23,6 @@ public class GameBoard {
     private List<Enemy> enemies;
 
     public GameBoard(){
-        this.board = new Tile[10][10]; //change
         this.tiles = new ArrayList<>();
         this.enemies = new ArrayList<>();
     }
@@ -45,60 +44,85 @@ public class GameBoard {
                 Tile newTile;
                 Enemy newEnemy;
                 switch (tileType) {
-                    case '.' -> newTile = new Empty(new Position(x, y));
-                    case '#' -> newTile = new Wall(new Position(x, y));
-                    case '@' -> player.setPosition(new Position(x, y));
+                    case '.' -> {
+                        newTile = new Empty(new Position(x, y));
+                        tiles.add(newTile);
+                        board[x][y] = newTile;
+                    }
+                    case '#' -> {
+                        newTile = new Wall(new Position(x, y));
+                        tiles.add(newTile);
+                        board[x][y] = newTile;
+                    }
+                    case '@' -> {
+                        player.setPosition(new Position(x, y));
+                        tiles.add(player);
+                        board[x][y] = player;
+                    }
                     case 's' -> {
                         newEnemy = new Monster('s', new Position(x, y), "Lannister Solider", 80, 8, 3, 25, 3);
                         enemies.add(newEnemy);
+                        board[x][y] = newEnemy;
                     }
                     case 'k' -> {
                         newEnemy = new Monster('k', new Position(x, y), "Lannister Knight", 200, 14, 8, 50, 4);
                         enemies.add(newEnemy);
+                        board[x][y] = newEnemy;
                     }
                     case 'q' -> {
                         newEnemy = new Monster('q', new Position(x, y), "Queen's Guard", 400, 20, 15, 5, 100);
                         enemies.add(newEnemy);
+                        board[x][y] = newEnemy;
                     }
                     case 'z' -> {
                         newEnemy = new Monster('z', new Position(x, y), "Wright", 600, 30, 15, 3, 100);
                         enemies.add(newEnemy);
+                        board[x][y] = newEnemy;
                     }
                     case 'b' -> {
                         newEnemy = new Monster('b', new Position(x, y), "Bear-Wright", 1000, 75, 30, 4, 250);
                         enemies.add(newEnemy);
+                        board[x][y] = newEnemy;
                     }
                     case 'g' -> {
                         newEnemy = new Monster('g', new Position(x, y), "Giant-Wright", 1500, 100, 40, 5, 500);
                         enemies.add(newEnemy);
+                        board[x][y] = newEnemy;
                     }
                     case 'w' -> {
                         newEnemy = new Monster('w', new Position(x, y), "White Walker", 2000, 150, 50, 6, 1000);
                         enemies.add(newEnemy);
+                        board[x][y] = newEnemy;
                     }
                     case 'M' -> {
                         newEnemy = new Monster('M', new Position(x, y), "The Mountain", 1000, 60, 25, 6, 500);
                         enemies.add(newEnemy);
+                        board[x][y] = newEnemy;
                     }
                     case 'C' -> {
                         newEnemy = new Monster('C', new Position(x, y), "Queen Cersei", 100, 10, 10, 1, 1000);
                         enemies.add(newEnemy);
+                        board[x][y] = newEnemy;
                     }
                     case 'K' -> {
                         newEnemy = new Monster('K', new Position(x, y), "Knight's King", 5000, 300, 150, 8, 5000);
                         enemies.add(newEnemy);
+                        board[x][y] = newEnemy;
                     }
                     case 'B' -> {
                         newEnemy = new Trap('B', new Position(x, y), "Bonus Trap", 1, 1, 1, 250, 1, 5);
                         enemies.add(newEnemy);
+                        board[x][y] = newEnemy;
                     }
                     case 'Q' -> {
                         newEnemy = new Trap('Q', new Position(x, y), "Queen's Trap", 250, 50, 10, 100, 3, 7);
                         enemies.add(newEnemy);
+                        board[x][y] = newEnemy;
                     }
                     case 'D' -> {
                         newEnemy = new Trap('D', new Position(x, y), "Death Trap", 500, 100, 20, 250, 1, 10);
                         enemies.add(newEnemy);
+                        board[x][y] = newEnemy;
                     }
                 }
             }
