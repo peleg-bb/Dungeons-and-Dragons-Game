@@ -25,7 +25,8 @@ public class UserInterface implements Observer {
         int choice = UI.choosePlayer();
         // read levels from file
         List<List<String>> levels = UI.readFiles(args);
-        new GameFlow(choice, levels);
+        //List<List<String>> levels = ""
+        new GameFlow(choice, levels, UI);
         System.out.println("Game over, Bye bye!");
     }
 
@@ -83,7 +84,7 @@ public class UserInterface implements Observer {
 
     @Override
     public void sendMessage(String msg) {
-
+        System.out.println(msg);
     }
 
     // Reads file and returns a list of lines

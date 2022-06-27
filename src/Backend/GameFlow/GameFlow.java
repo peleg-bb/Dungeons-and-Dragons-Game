@@ -20,8 +20,10 @@ public class GameFlow implements Observable {
     private boolean hasNextLevel; // Temporary, will read from levels file
     Scanner reader = new Scanner(System.in);
 
-    public GameFlow(int playerChoice, List<List<String>> levels) { // Recieves a player from UI
+    public GameFlow(int playerChoice, List<List<String>> levels, UserInterface UI) { // Recieves a player from UI
         gameOver = false;
+        this.observers = new ArrayList<Observer>();
+        this.addObserver(UI);
         this.levels = levels;
         this.gameBoard = new GameBoard();
         gameBoard.createPlayer(playerChoice, new Position(0, 0));
@@ -30,10 +32,11 @@ public class GameFlow implements Observable {
                 String currentLevelName = "Current level: " + currentLevelIndex;
                 notifyObservers(currentLevelName);// print?
                 gameBoard.setLevel(level);
-                Level currentLevel = new Level(gameBoard.player, gameBoard.getEnemies());
+                Level currentLevel = new Level(gameBoard);
                 while (!currentLevel.gameOver) {
                     char userChoice = UserInterface.acceptInput();
                     currentLevel.GameTick(userChoice);
+
                 }
                 gameOver = true;
             }
