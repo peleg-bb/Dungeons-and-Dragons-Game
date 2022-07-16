@@ -33,12 +33,13 @@ public class GameFlow implements Observable {
                 notifyObservers(currentLevelName);// print?
                 gameBoard.setLevel(level);
                 Level currentLevel = new Level(gameBoard);
-                while (!currentLevel.gameOver) {
+                while (!currentLevel.done) {
                     char userChoice = UserInterface.acceptInput();
                     currentLevel.GameTick(userChoice);
-
                 }
-                gameOver = true;
+                if (currentLevel.gameOver) {
+                    gameOver = true;
+                }
             }
         }
     }

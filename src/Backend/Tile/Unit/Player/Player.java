@@ -52,8 +52,7 @@ public abstract class Player extends Unit {
 
     public void onKill(Unit u){
         this.experience = this.experience + u.getExperience();
-        this.massageCallBack.send("You killed " + u.getName()); // Needs to be instantiated and I hate it
-        this.setPosition(u.getPosition());
+        this.massageCallBack.send("You killed " + u.getName());
     }
     public void onDeath(Unit u){
         this.tile = 'X';

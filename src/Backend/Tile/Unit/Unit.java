@@ -58,15 +58,9 @@ public abstract class Unit extends Tile {
        int defenseP = defend();
        if(attackP - defenseP > 0){
            u.damage(attackP - defenseP);
-
            String msg = this.name + " attacked " + u.name +
                    " and did " + (attackP - defenseP) + " damage";
-//           this.setMassageCallBack(new MassageCallBack() {
-//               @Override
-//               public void send(String m) {
-//                   massageCallBack.send(m);
-//               }
-//           });
+           massageCallBack.send(msg);
            if(u.isDead()){
                u.onDeath(this);
                this.onKill(u);

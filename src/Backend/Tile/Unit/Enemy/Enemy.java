@@ -38,11 +38,14 @@ public abstract class Enemy extends Unit {
     }
 
     public void onDeath(Unit u){
+        //System.out.println(this.getName() + " died.");
+        this.enemyDeathCallBack.call();
         this.massageCallBack.send(this.getName() + " died.");
     }
 
     public void onKill(Unit u){
         // send message to player that enemy has killed player
         this.massageCallBack.send(this.getName() + " killed " + u.getName());
+        // end game`
     }
 }

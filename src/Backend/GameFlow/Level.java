@@ -1,12 +1,11 @@
 package Backend.GameFlow;
-
+import Backend.Tile.StaticTiles.Empty;
 import Backend.Tile.Unit.Enemy.Enemy;
 import Backend.Tile.Unit.Player.Player;
 import Backend.Tile.Position;
 import Backend.Tile.Tile;
-
-
 import java.util.List;
+
 
 public class Level {
     private Player player;
@@ -28,12 +27,19 @@ public class Level {
         move(choice);
         System.out.println(board.toString()); // print board via message call back and not system.out.println
         if (player.isDead()){
-            player.setMassageCallBack((msg) -> gameOver = true);
+            gameOver = true;
+            done = true;
+            return;
         } else {
             for (Enemy e : enemies) {
                 move(e, e.onGameTick(player));
                 if (e.isDead()) {
-                    e.setEnemyDeathCallBack(() -> enemies.remove(e));
+//                    e.setEnemyDeathCallBack(() -> {
+//                        enemies.remove(e);
+//                        board.remove(e);
+//                        System.out.println("Enemy died"); // give name of enemy
+//                    });
+                    System.out.println("Enemy died, reached e.isDead in Level!"); // give name of enemy
                 }
             }
             if (enemies.isEmpty()) {
