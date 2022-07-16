@@ -24,16 +24,14 @@ public class UserInterface implements Observer {
         System.out.println("Available players are: ");
         int choice = UI.choosePlayer();
         // read levels from file
-        //List<List<String>> levels = UI.readFiles(args);
-        List<List<String>> levels = UI.makeLevels();
-        //List<List<String>> levels = ""
+        List<List<String>> levels = UI.readFiles(args);
         new GameFlow(choice, levels, UI);
         System.out.println("Game over, Bye bye!");
     }
 
     // Let user choose a player
     public int choosePlayer() {
-        System.out.println("1. Jon Snow1. Jon Snow             Health: 300/300         Attack: 30              Defense: 4              Level: 1");
+        System.out.println("1. Jon Snow             Health: 300/300         Attack: 30              Defense: 4              Level: 1");
         System.out.println("        Experience: 0/50                Cooldown: 0/3");
         System.out.println("2. The Hound            Health: 400/400         Attack: 20              Defense: 6              Level: 1");
         System.out.println("        Experience: 0/50                Cooldown: 0/5");
@@ -45,19 +43,17 @@ public class UserInterface implements Observer {
         System.out.println("        Experience: 0/50                Energy: 100/100");
         System.out.println("6. Bronn                Health: 250/250         Attack: 35              Defense: 3              Level: 1");
         System.out.println("        Experience: 0/50                Energy: 100/100");
-        System.out.println("7. Ygritte              Health: 220/220         Attack: 30              Defense: 2              Level: 1");
-        System.out.println("        Experience: 0/50                Arrows: 10              Range: 6");
         System.out.println("Select player:");
         while (true) {
             try {
                 int choice = reader.nextInt();
-                while (choice < 1 || choice > 7) {
-                    System.out.println("You must choose a number between 1-7. Select player: ");
+                while (choice < 1 || choice > 6) {
+                    System.out.println("You must choose a number between 1-6. Select player: ");
                     choice = reader.nextInt();
                 }
                 return choice;
             } catch (Exception e) {
-                System.out.println("You must choose a number between 1-7. Select player: ");
+                System.out.println("You must choose a number between 1-6. Select player: ");
                 reader.nextLine();
             }
         }
@@ -115,36 +111,36 @@ public class UserInterface implements Observer {
     }
 
     // Makes List<List<String>> from String
-    private List<List<String>> makeLevels() {
-        String level = "#################################################\n" +
-                "#....s...###..........................#.........#\n" +
-                "#........#B#....##..........##........#.........#\n" +
-                "#........#......##..........##........#.........#\n" +
-                "#........#............................#.........#\n" +
-                "#........#............................#.........#\n" +
-                "#........#......##..........##........#.........#\n" +
-                "#........#......##s........k##........#.........#\n" +
-                "#........#s.................##.......k#.........#\n" +
-                "#@...........................Q.................q#\n" +
-                "#........#s.................##.......k#.........#\n" +
-                "#........#......##s........k##........#.........#\n" +
-                "#........#......##..........##........#.........#\n" +
-                "#........#............................#.........#\n" +
-                "#........#............................#.........#\n" +
-                "#........#......##..........##........#.........#\n" +
-                "#........#B#....##..........##........#.........#\n" +
-                "#....s...###..........................#.........#\n" +
-                "#################################################";
-        List<List<String>> levels = new ArrayList<List<String>>();
-        String[] lines = level.split("\n");
-        for (String line : lines) {
-            List<String> levelFiles = new ArrayList<>();
-            String[] lineFiles = line.split(" ");
-            for (String file : lineFiles) {
-                levelFiles.add(file);
-            }
-            levels.add(levelFiles);
-        }
-        return levels;
-    }
+//    private List<List<String>> makeLevels() {
+//        String level = "#################################################\n" +
+//                "#....s...###..........................#.........#\n" +
+//                "#........#B#....##..........##........#.........#\n" +
+//                "#........#......##..........##........#.........#\n" +
+//                "#........#............................#.........#\n" +
+//                "#........#............................#.........#\n" +
+//                "#........#......##..........##........#.........#\n" +
+//                "#........#......##s........k##........#.........#\n" +
+//                "#........#s.................##.......k#.........#\n" +
+//                "#@...........................Q.................q#\n" +
+//                "#........#s.................##.......k#.........#\n" +
+//                "#........#......##s........k##........#.........#\n" +
+//                "#........#......##..........##........#.........#\n" +
+//                "#........#............................#.........#\n" +
+//                "#........#............................#.........#\n" +
+//                "#........#......##..........##........#.........#\n" +
+//                "#........#B#....##..........##........#.........#\n" +
+//                "#....s...###..........................#.........#\n" +
+//                "#################################################";
+//        List<List<String>> levels = new ArrayList<List<String>>();
+//        String[] lines = level.split("\n");
+//        for (String line : lines) {
+//            List<String> levelFiles = new ArrayList<>();
+//            String[] lineFiles = line.split(" ");
+//            for (String file : lineFiles) {
+//                levelFiles.add(file);
+//            }
+//            levels.add(levelFiles);
+//        }
+//        return levels;
+//    }
 }

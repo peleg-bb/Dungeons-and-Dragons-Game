@@ -28,11 +28,11 @@ public class Warrior extends Player{
     }
     public void onAbilityCast(List<Enemy> enemies){
         if(this.remainingCoolDown>0){
-            //trows the error
+            massageCallBack.send("Cannot cast ability, not enough energy, need to cool down");
         }
         else{
             this.remainingCoolDown = this.abilityCoolDown;
-            health.setHealthAmount(Math.min(health.getHealthAmount() +10*defensePoint,health.getHealthPool()));
+            health.setHealthAmount(Math.min(health.getHealthAmount() + 10*defensePoint,health.getHealthPool()));
         }
         for(Enemy e : enemies ){///
             if(this.position.range(e.position)<3){
@@ -40,5 +40,9 @@ public class Warrior extends Player{
                 break;
             }
         }
+    }
+
+    public String description(){
+        return super.description() + "      cool down: " + this.remainingCoolDown + "/" + this.abilityCoolDown;
     }
 }

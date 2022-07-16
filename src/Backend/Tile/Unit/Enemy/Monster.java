@@ -3,6 +3,8 @@ package Backend.Tile.Unit.Enemy;
 import Backend.Tile.Position;
 import Backend.Tile.Unit.Player.Player;
 
+
+
 public class Monster extends Enemy{
     private int visionRange;
 
@@ -11,38 +13,63 @@ public class Monster extends Enemy{
         super(tile,position, name,healthA, attackPoints, defensePoint, expirience);
         this.visionRange = visionRange;
     }
-    public void onGameTick(Player p){
-        if(this.position.range(p.position)<visionRange){
+    public char onGameTick(Player p){
+        if(inRange(p)){
             int dx = this.position.getX()-p.position.getX();
             int dy = this.position.getY()-p.position.getY();
-            if(Math.abs(dx)>Math.abs(dy)){
+            if(dy==0) { // TODO: implement this
                 if(dx>0){
-                    position.setX(position.getX()-1);
+                    return 'w';
                 }
                 else{
-                    position.setX(position.getX()+1);
+                    return 's';
                 }
             }
-
-            else{
-                if(dy>0){
-                    position.setY(position.getY()+1);
+            else if(dx==0){
+                if(dy<0){
+                    return 'd';
                 }
                 else{
-                    position.setY(position.getY()-1);
+                    return 'a';
+                }
+            }
+            else if(Math.abs(dx)<Math.abs(dy)){ // BUG: This is not correct
+                if(dx>0){
+                    return 'w';
+                }
+                else{
+                    return 's';
+                }
+            }
+            else{
+                if(dy<0){
+                    return 'd';
+                }
+                else{
+                    return 'a';
                 }
             }
         }
         else{
-            int move = (int) (Math.random()*(4-0)) + 0;
+            int move = (int) (Math.random() * 5);
+            // generate random integer between 0 and 4
             switch(move){
                 case 0: break;
-                case 1: position.setX(position.getX()-1); break;
-                case 2 : position.setX(position.getX()+1); break;
-                case 3 : position.setY(position.getY()+1); break;
-                case 4 : position.setY(position.getY()-1); break;
+                case 1: return 'w';
+                case 2 : return 's';
+                case 3 : return 'd';
+                case 4 : return 'a';
             }
         }
+        return ' ';
+    }
+
+    public boolean inRange(Player p){
+        return this.position.range(p.position)<visionRange;
+    }
+
+    public String description(){
+        return super.description() + "     Experience Value: " + this.experience + "     Vision Range: " + this.visionRange;
     }
 
 }

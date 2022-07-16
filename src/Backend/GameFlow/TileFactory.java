@@ -19,7 +19,6 @@ public class TileFactory { // Todo : implement me properly
     private Map<Character, Supplier<Enemy>> enemiesMap;
     private Player selected;
     public TileFactory(){
-        //playersList = initPlayers();
         enemiesMap = initEnemies();
     }
 
@@ -45,18 +44,6 @@ public class TileFactory { // Todo : implement me properly
         return enemies.stream().collect(Collectors.toMap(s -> s.get().getTile(), Function.identity()));
     }
 
-//    private List<Supplier<Player>> initPlayers() {
-//        return Arrays.asList(
-//                () -> new Warrior("Jon Snow", 300, 30, 4, 3),
-//                () -> new Warrior("The Hound", 400, 20, 6, 5),
-//                () -> new Mage("Melisandre", 100, 5, 1, 300, 30, 15, 5, 6),
-//                () -> new Mage("Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4),
-//                () -> new Rogue("Arya Stark", 150, 40, 2, 20),
-//                () -> new Rogue("Bronn", 250, 35, 3, 50)
-//               // () -> new Hunter("Ygritte", 220, 30, 2, 6)
-//        );
-//    }
-
     public List<Player> listPlayers(){
         return playersList.stream().map(Supplier::get).collect(Collectors.toList());
     }
@@ -68,24 +55,7 @@ public class TileFactory { // Todo : implement me properly
     // returns a list
     public List<Enemy> getEnemies(){
         return enemiesMap.values().stream().map(Supplier::get).collect(Collectors.toList());
-                //enemiesMap.stream().map(Supplier::get).collect(Collectors.toList());
+
     }
 
-    // TODO: Add additional callbacks of your choice
-
-//    public Enemy produceEnemy(char tile, Position position, ...) {
-//        ...
-//    }
-//
-//    public Player producePlayer(int idx, ...){
-//		...
-//    }
-//
-//    public Empty produceEmpty(Position position, ...){
-//        ...
-//    }
-//
-//    public Wall produceWall(Position position, ...){
-//        ...
-//    }
 }

@@ -31,7 +31,7 @@ public class GameBoard implements PositionObserver {
                 return t;
             }
         }
-        throw new RuntimeException("Attempting to access a tile which doesn't exist.");
+        throw new RuntimeException("Attempting to access a tile which doesn't exist- x = " + x + " y = " + y);
     }
 
     public void setLevel(List<String> lines){
@@ -41,7 +41,7 @@ public class GameBoard implements PositionObserver {
                 char tileType = lines.get(x).charAt(y);
                 Tile newTile;
                 Enemy newEnemy;
-                switch (tileType) {
+                switch (tileType) { // This is ugly
                     case '.' -> {
                         newTile = new Empty(new Position(x, y));
                         tiles.add(newTile);
@@ -56,84 +56,150 @@ public class GameBoard implements PositionObserver {
                         player.setPosition(new Position(x, y));
                         tiles.add(player);
                         board[x][y] = player;
+                        player.setMassageCallBack((msg) -> System.out.println(msg));
                     }
                     case 's' -> {
                         newEnemy = new Monster('s', new Position(x, y), "Lannister Solider", 80, 8, 3, 25, 3);
                         tiles.add(newEnemy);
                         enemies.add(newEnemy);
                         board[x][y] = newEnemy;
+                        newEnemy.setEnemyDeathCallBack(() -> {
+                            enemies.remove(newEnemy);
+                            remove(newEnemy);
+                        });
+                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
                     case 'k' -> {
                         newEnemy = new Monster('k', new Position(x, y), "Lannister Knight", 200, 14, 8, 50, 4);
                         tiles.add(newEnemy);
                         enemies.add(newEnemy);
                         board[x][y] = newEnemy;
+                        newEnemy.setEnemyDeathCallBack(() -> {
+                            enemies.remove(newEnemy);
+                            remove(newEnemy);
+                        });
+                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
                     case 'q' -> {
                         newEnemy = new Monster('q', new Position(x, y), "Queen's Guard", 400, 20, 15, 5, 100);
                         tiles.add(newEnemy);
                         enemies.add(newEnemy);
                         board[x][y] = newEnemy;
+                        newEnemy.setEnemyDeathCallBack(() -> {
+                            enemies.remove(newEnemy);
+                            remove(newEnemy);
+                        });
+                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
                     case 'z' -> {
                         newEnemy = new Monster('z', new Position(x, y), "Wright", 600, 30, 15, 3, 100);
                         tiles.add(newEnemy);
                         enemies.add(newEnemy);
                         board[x][y] = newEnemy;
+                        newEnemy.setEnemyDeathCallBack(() -> {
+                            enemies.remove(newEnemy);
+                            remove(newEnemy);
+                        });
+                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
                     case 'b' -> {
                         newEnemy = new Monster('b', new Position(x, y), "Bear-Wright", 1000, 75, 30, 4, 250);
                         tiles.add(newEnemy);
                         enemies.add(newEnemy);
                         board[x][y] = newEnemy;
+                        newEnemy.setEnemyDeathCallBack(() -> {
+                            enemies.remove(newEnemy);
+                            remove(newEnemy);
+                        });
+                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
                     case 'g' -> {
                         newEnemy = new Monster('g', new Position(x, y), "Giant-Wright", 1500, 100, 40, 5, 500);
                         tiles.add(newEnemy);
                         enemies.add(newEnemy);
                         board[x][y] = newEnemy;
+                        newEnemy.setEnemyDeathCallBack(() -> {
+                            enemies.remove(newEnemy);
+                            remove(newEnemy);
+                        });
+                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
                     case 'w' -> {
                         newEnemy = new Monster('w', new Position(x, y), "White Walker", 2000, 150, 50, 6, 1000);
                         tiles.add(newEnemy);
                         enemies.add(newEnemy);
                         board[x][y] = newEnemy;
+                        newEnemy.setEnemyDeathCallBack(() -> {
+                            enemies.remove(newEnemy);
+                            remove(newEnemy);
+                        });
+                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
                     case 'M' -> {
                         newEnemy = new Monster('M', new Position(x, y), "The Mountain", 1000, 60, 25, 6, 500);
                         tiles.add(newEnemy);
                         enemies.add(newEnemy);
                         board[x][y] = newEnemy;
+                        newEnemy.setEnemyDeathCallBack(() -> {
+                            enemies.remove(newEnemy);
+                            remove(newEnemy);
+                        });
+                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
                     case 'C' -> {
                         newEnemy = new Monster('C', new Position(x, y), "Queen Cersei", 100, 10, 10, 1, 1000);
                         tiles.add(newEnemy);
                         enemies.add(newEnemy);
                         board[x][y] = newEnemy;
+                        newEnemy.setEnemyDeathCallBack(() -> {
+                            enemies.remove(newEnemy);
+                            remove(newEnemy);
+                        });
+                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
                     case 'K' -> {
                         newEnemy = new Monster('K', new Position(x, y), "Knight's King", 5000, 300, 150, 8, 5000);
                         tiles.add(newEnemy);
                         enemies.add(newEnemy);
                         board[x][y] = newEnemy;
+                        newEnemy.setEnemyDeathCallBack(() -> {
+                            enemies.remove(newEnemy);
+                            remove(newEnemy);
+                        });
+                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
                     case 'B' -> {
                         newEnemy = new Trap('B', new Position(x, y), "Bonus Trap", 1, 1, 1, 250, 1, 5);
                         tiles.add(newEnemy);
                         enemies.add(newEnemy);
                         board[x][y] = newEnemy;
+                        newEnemy.setEnemyDeathCallBack(() -> {
+                            enemies.remove(newEnemy);
+                            remove(newEnemy);
+                        });
+                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
                     case 'Q' -> {
                         newEnemy = new Trap('Q', new Position(x, y), "Queen's Trap", 250, 50, 10, 100, 3, 7);
                         tiles.add(newEnemy);
                         enemies.add(newEnemy);
                         board[x][y] = newEnemy;
+                        newEnemy.setEnemyDeathCallBack(() -> {
+                            enemies.remove(newEnemy);
+                            remove(newEnemy);
+                        });
+                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
                     case 'D' -> {
                         newEnemy = new Trap('D', new Position(x, y), "Death Trap", 500, 100, 20, 250, 1, 10);
                         tiles.add(newEnemy);
                         enemies.add(newEnemy);
                         board[x][y] = newEnemy;
+                        newEnemy.setEnemyDeathCallBack(() -> {
+                            enemies.remove(newEnemy);
+                            remove(newEnemy);
+                        });
+                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
                 }
             }
@@ -145,29 +211,32 @@ public class GameBoard implements PositionObserver {
 
 
     public void createPlayer(int playerChoice, Position playerPosition) {
-
         switch (playerChoice) {
             case 1:
                 this.player = new Warrior("Jon Snow", playerPosition, 300, 30, 4, 3);
+                break;
             case 2:
                 this.player = new Warrior("The Hound", playerPosition, 400, 20, 6, 5);
+                break;
             case 3:
                 this.player = new Mage("Melisandre", playerPosition, 100, 5, 1, 15, 300, 30, 5,6);
+                break;
             case 4:
                 this.player = new Mage("Thoros of Myr", playerPosition, 250, 25, 4, 20, 150, 20, 3, 4);
+                break;
             case 5:
                 this.player = new Rogue("Arya Stark", playerPosition, 150, 40, 2, 20);
+                break;
             case 6:
                 this.player = new Rogue("Bronn", playerPosition, 250, 35, 3, 50);
-//            case 7:
-//                this.player = new Hunter(playerPosition, "Ygritte", new Health(220), 30, 2, 6);
+                break;
         }
-
     }
     public void remove(Enemy e) { // Never assigned, might be redundant
+        Empty empty = new Empty(e.getPosition());
         tiles.remove(e);
-        Position p = e.getPosition();
-        board[e.getPosition().getX()][e.getPosition().getY()] = new Empty(e.getPosition());
+        tiles.add(empty);
+        board[e.getPosition().getX()][e.getPosition().getY()] = empty;
     }
 
     @Override
@@ -188,9 +257,10 @@ public class GameBoard implements PositionObserver {
 
 
     @Override
-    public void update(Tile tile) { // Updates tile postion in board
-        tiles.remove(getTile(tile.getPosition().getX(), tile.getPosition().getY())); // Removes old tile
-        board[tile.getPosition().getX()][tile.getPosition().getY()] = tile; // Updates board with new tile
-        tiles.add(tile); // Adds new tile to list of tiles
+    public void update(Tile tile, Tile tile2) { // Updates tile postion in board
+        Position p = tile.getPosition();
+        Position p2 = tile2.getPosition();
+        board[p.getX()][p.getY()] = tile;
+        board[p2.getX()][p2.getY()] = tile2;
     }
 }
