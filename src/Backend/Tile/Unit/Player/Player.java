@@ -57,8 +57,8 @@ public abstract class Player extends Unit {
     }
     public void onDeath(Unit u){
         this.tile = 'X';
-        this.massageCallBack.send("You died");
         u.onKill(this);
+        this.massageCallBack.send("You died");
         // End game
     }
     public abstract void onAbilityCast(List<Enemy> enemies);

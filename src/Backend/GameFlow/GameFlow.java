@@ -27,8 +27,9 @@ public class GameFlow implements Observable {
         this.levels = levels;
         this.gameBoard = new GameBoard();
         gameBoard.createPlayer(playerChoice, new Position(0, 0));
-        while (!gameOver && !levels.isEmpty()) {
-            for (List<String> level : levels) {
+
+        for (List<String> level : levels) {
+            while (!gameOver){
                 String currentLevelName = "Current level: " + currentLevelIndex;
                 currentLevelIndex++;
                 notifyObservers(currentLevelName);
@@ -36,15 +37,21 @@ public class GameFlow implements Observable {
                 Level currentLevel = new Level(gameBoard);
                 notifyObservers(gameBoard.toString());
                 while (!currentLevel.done) {
+                    if (currentLevel.gameOver) {
+                        gameOver = true;
+                        break;
+                    }
                     char userChoice = UserInterface.acceptInput();
                     currentLevel.GameTick(userChoice);
                     if (currentLevel.gameOver) {
                         gameOver = true;
+                        break;
                     }
                 }
-
             }
         }
+
+
     }
 
 
