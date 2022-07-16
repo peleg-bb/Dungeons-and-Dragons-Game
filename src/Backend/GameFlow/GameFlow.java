@@ -30,16 +30,19 @@ public class GameFlow implements Observable {
         while (!gameOver && !levels.isEmpty()) {
             for (List<String> level : levels) {
                 String currentLevelName = "Current level: " + currentLevelIndex;
-                notifyObservers(currentLevelName);// print?
+                currentLevelIndex++;
+                notifyObservers(currentLevelName);
                 gameBoard.setLevel(level);
                 Level currentLevel = new Level(gameBoard);
+                notifyObservers(gameBoard.toString());
                 while (!currentLevel.done) {
                     char userChoice = UserInterface.acceptInput();
                     currentLevel.GameTick(userChoice);
+                    if (currentLevel.gameOver) {
+                        gameOver = true;
+                    }
                 }
-                if (currentLevel.gameOver) {
-                    gameOver = true;
-                }
+
             }
         }
     }

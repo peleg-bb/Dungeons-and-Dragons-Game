@@ -41,7 +41,7 @@ public class Mage extends Player{
 
     public void onAbilityCast(List<Enemy> enemies){
         if(currentMana<manaCost){
-            throw new IllegalArgumentException("can not cast ability");
+            massageCallBack.send("Cannot cast ability, not enough energy");
         }
         this.currentMana = this.currentMana - this.manaCost;
         int hits = 0 ;
@@ -55,11 +55,17 @@ public class Mage extends Player{
             int index = (int) (Math.random()*(enemies.size()-0)) + 0;
             Enemy toAttack = enemy.get(index);
             toAttack.health.setHealthPool(toAttack.health.getHealthPool() - spellPower);
-
+            massageCallBack.send("You attacked " + toAttack.getName() + " for " + spellPower +
+                    " damage using special ability: " + spacial_ability);
             hits = hits + 1;
         }
     }
 
+
+    public String description(){
+        return super.toString() + "     Mana: " + currentMana + "/"+ manaPool +
+                "     Mana Cost: " + manaCost + "     Spell Power: " + spellPower;
+    }
 
     }
 

@@ -66,7 +66,6 @@ public class GameBoard implements PositionObserver {
                         newEnemy.setEnemyDeathCallBack(() -> {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
-                            System.out.println("Enemy " + newEnemy.getName() + " died");
                         });
                         newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
@@ -78,7 +77,6 @@ public class GameBoard implements PositionObserver {
                         newEnemy.setEnemyDeathCallBack(() -> {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
-                            System.out.println("Enemy " + newEnemy.getName() + " died");
                         });
                         newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
@@ -90,7 +88,6 @@ public class GameBoard implements PositionObserver {
                         newEnemy.setEnemyDeathCallBack(() -> {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
-                            System.out.println("Enemy " + newEnemy.getName() + " died");
                         });
                         newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
@@ -102,7 +99,6 @@ public class GameBoard implements PositionObserver {
                         newEnemy.setEnemyDeathCallBack(() -> {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
-                            System.out.println("Enemy " + newEnemy.getName() + " died");
                         });
                         newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
@@ -114,7 +110,6 @@ public class GameBoard implements PositionObserver {
                         newEnemy.setEnemyDeathCallBack(() -> {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
-                            System.out.println("Enemy " + newEnemy.getName() + " died");
                         });
                         newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
@@ -126,7 +121,6 @@ public class GameBoard implements PositionObserver {
                         newEnemy.setEnemyDeathCallBack(() -> {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
-                            System.out.println("Enemy " + newEnemy.getName() + " died");
                         });
                         newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
@@ -138,7 +132,6 @@ public class GameBoard implements PositionObserver {
                         newEnemy.setEnemyDeathCallBack(() -> {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
-                            System.out.println("Enemy " + newEnemy.getName() + " died");
                         });
                         newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
@@ -150,7 +143,6 @@ public class GameBoard implements PositionObserver {
                         newEnemy.setEnemyDeathCallBack(() -> {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
-                            System.out.println("Enemy " + newEnemy.getName() + " died");
                         });
                         newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
@@ -162,7 +154,6 @@ public class GameBoard implements PositionObserver {
                         newEnemy.setEnemyDeathCallBack(() -> {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
-                            System.out.println("Enemy " + newEnemy.getName() + " died");
                         });
                         newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
@@ -174,7 +165,6 @@ public class GameBoard implements PositionObserver {
                         newEnemy.setEnemyDeathCallBack(() -> {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
-                            System.out.println("Enemy " + newEnemy.getName() + " died");
                         });
                         newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
@@ -186,7 +176,6 @@ public class GameBoard implements PositionObserver {
                         newEnemy.setEnemyDeathCallBack(() -> {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
-                            System.out.println("Enemy " + newEnemy.getName() + " died");
                         });
                         newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
@@ -198,7 +187,6 @@ public class GameBoard implements PositionObserver {
                         newEnemy.setEnemyDeathCallBack(() -> {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
-                            System.out.println("Enemy " + newEnemy.getName() + " died");
                         });
                         newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
@@ -210,7 +198,6 @@ public class GameBoard implements PositionObserver {
                         newEnemy.setEnemyDeathCallBack(() -> {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
-                            System.out.println("Enemy " + newEnemy.getName() + " died");
                         });
                         newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
                     }
@@ -237,8 +224,6 @@ public class GameBoard implements PositionObserver {
                 this.player = new Rogue("Arya Stark", playerPosition, 150, 40, 2, 20);
             case 6:
                 this.player = new Rogue("Bronn", playerPosition, 250, 35, 3, 50);
-//            case 7:
-//                this.player = new Hunter(playerPosition, "Ygritte", new Health(220), 30, 2, 6);
         }
     }
     public void remove(Enemy e) { // Never assigned, might be redundant

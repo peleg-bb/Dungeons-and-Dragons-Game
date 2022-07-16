@@ -23,29 +23,24 @@ public class Level {
     }
 
     public void GameTick(char choice) {
-        player.onGameTick();
-        move(choice);
-        System.out.println(board.toString()); // print board via message call back and not system.out.println
-        if (player.isDead()){
+        if (player.isDead()) {
+            System.out.println(board.toString());// TODO: print board via message call back and not system.out.println
             gameOver = true;
             done = true;
             return;
-        } else {
+        }
+        else {
+            player.onGameTick();
+            move(choice);
             for (Enemy e : enemies) {
                 move(e, e.onGameTick(player));
-                if (e.isDead()) {
-//                    e.setEnemyDeathCallBack(() -> {
-//                        enemies.remove(e);
-//                        board.remove(e);
-//                        System.out.println("Enemy died"); // give name of enemy
-//                    });
-                    System.out.println("Enemy died, reached e.isDead in Level!"); // give name of enemy
-                }
             }
             if (enemies.isEmpty()) {
                 done = true;
+                return;
             }
         }
+        System.out.println(board.toString());
     }
     public void move(char move) {
         int x = player.getPosition().getX();

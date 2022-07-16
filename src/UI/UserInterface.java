@@ -31,7 +31,7 @@ public class UserInterface implements Observer {
 
     // Let user choose a player
     public int choosePlayer() {
-        System.out.println("1. Jon Snow1. Jon Snow             Health: 300/300         Attack: 30              Defense: 4              Level: 1");
+        System.out.println("1. Jon Snow             Health: 300/300         Attack: 30              Defense: 4              Level: 1");
         System.out.println("        Experience: 0/50                Cooldown: 0/3");
         System.out.println("2. The Hound            Health: 400/400         Attack: 20              Defense: 6              Level: 1");
         System.out.println("        Experience: 0/50                Cooldown: 0/5");
@@ -43,19 +43,17 @@ public class UserInterface implements Observer {
         System.out.println("        Experience: 0/50                Energy: 100/100");
         System.out.println("6. Bronn                Health: 250/250         Attack: 35              Defense: 3              Level: 1");
         System.out.println("        Experience: 0/50                Energy: 100/100");
-        System.out.println("7. Ygritte              Health: 220/220         Attack: 30              Defense: 2              Level: 1");
-        System.out.println("        Experience: 0/50                Arrows: 10              Range: 6");
         System.out.println("Select player:");
         while (true) {
             try {
                 int choice = reader.nextInt();
-                while (choice < 1 || choice > 7) {
-                    System.out.println("You must choose a number between 1-7. Select player: ");
+                while (choice < 1 || choice > 6) {
+                    System.out.println("You must choose a number between 1-6. Select player: ");
                     choice = reader.nextInt();
                 }
                 return choice;
             } catch (Exception e) {
-                System.out.println("You must choose a number between 1-7. Select player: ");
+                System.out.println("You must choose a number between 1-6. Select player: ");
                 reader.nextLine();
             }
         }

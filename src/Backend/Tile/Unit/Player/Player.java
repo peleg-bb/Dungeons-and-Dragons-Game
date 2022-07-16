@@ -9,7 +9,6 @@ import java.util.List;
 
 public abstract class Player extends Unit {
     protected int experience;
-
     protected int level;
     public Player(String name, Position position, int healthA , int attackPoints,
                   int defensePoint){
@@ -41,6 +40,7 @@ public abstract class Player extends Unit {
     }
     public void visit(Player p){
         System.out.println("Player " + this.name + " is trying to visit Player " + p.name);
+        // Should never be instantiated, used as a warning that something went wrong
     }
     public void visit(Enemy e){
         super.combat(e);
@@ -52,7 +52,8 @@ public abstract class Player extends Unit {
 
     public void onKill(Unit u){
         this.experience = this.experience + u.getExperience();
-        this.massageCallBack.send("You killed " + u.getName());
+        this.massageCallBack.send(this.name + " gained " + u.getExperience() +
+                " experience points by killing " + u.getName());
     }
     public void onDeath(Unit u){
         this.tile = 'X';
@@ -88,6 +89,10 @@ public abstract class Player extends Unit {
 //
 //
 //    }
+
+    public String description() {
+        return super.description() + "     Level: " + level + "     Experience: " + experience;
+    }
 
 
 

@@ -31,12 +31,14 @@ public class Rogue extends Player{
     @Override
     public void onAbilityCast(List<Enemy> enemies) {
         if(currentEnergy<cost){
-            throw new IllegalArgumentException("can not cast ability");
+            massageCallBack.send("Cannot cast ability, not enough energy");
         }
         this.currentEnergy = this.currentEnergy - this.cost;
         for(Enemy e : enemies){
             if(this.position.range(e.position)<2){
                 e.health.setHealthPool(e.health.getHealthPool() - attackPoints);
+                massageCallBack.send("You attacked " + e.getName() + " for " + attackPoints +
+                        " damage using special ability: " + spacialAbility);
             }
         }
     }

@@ -1,7 +1,6 @@
 package Backend.Tile.Unit;
 
 import Backend.Interfaces.MassageCallBack;
-import Backend.Interfaces.Observable;
 import Backend.Tile.StaticTiles.Empty;
 import Backend.Tile.Position;
 import Backend.Tile.Tile;
@@ -43,24 +42,30 @@ public abstract class Unit extends Tile {
     public void interact(Tile tile){
         tile.accept(this);
     }
-    public void damage(int d){
+    public void receiveDamage(int d){
         this.health.setHealthAmount(this.health.getHealthAmount()-d);
     }
     public int attack(){
         return (int) (Math.random()*(attackPoints-0)) + 0;
     }
     public int defend(){
-        return (int) (Math.random()*(defensePoint-0)) + 0;
+        return (int) (Math.random() * (defensePoint));
     }
 
     public void combat(Unit u){ //u is defender
+        massageCallBack.send(" ");
+        massageCallBack.send( this.name + " engaged in combat with " + u.name);
+        massageCallBack.send(description());
+        massageCallBack.send(u.description());
        int attackP = attack();
-       int defenseP = defend();
+       massageCallBack.send(this.name+ " rolled " + attackP + " attack points");
+       int defenseP = u.defend();
+         massageCallBack.send(u.name+ " rolled " + defenseP + " defense points");
        if(attackP - defenseP > 0){
-           u.damage(attackP - defenseP);
-           String msg = this.name + " attacked " + u.name +
-                   " and did " + (attackP - defenseP) + " damage";
-           massageCallBack.send(msg);
+           u.receiveDamage(attackP - defenseP);
+           massageCallBack.send(this.name + " dealt " + (attackP - defenseP) + " damage points to " + u.name);
+           massageCallBack.send(description());
+           massageCallBack.send(u.description());
            if(u.isDead()){
                u.onDeath(this);
                this.onKill(u);
@@ -119,6 +124,8 @@ public abstract class Unit extends Tile {
     public String getName(){
         return name;
     }
-
-
+    public String description() {
+        return name + "         Health: " + health.getHealthAmount() + "/" + health.getHealthPool() +
+                "   Attack: " + attackPoints + "     Defense: " + defensePoint;
+    }
 }

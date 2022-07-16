@@ -3,6 +3,8 @@ package Backend.Tile.Unit.Enemy;
 import Backend.Tile.Position;
 import Backend.Tile.Unit.Player.Player;
 
+
+
 public class Monster extends Enemy{
     private int visionRange;
 
@@ -11,21 +13,36 @@ public class Monster extends Enemy{
         super(tile,position, name,healthA, attackPoints, defensePoint, expirience);
         this.visionRange = visionRange;
     }
-    public char onGameTick(Player p){ // TODO: Make it visit the tile around rather than just change position!
-        if(this.position.range(p.position)<visionRange){
+    public char onGameTick(Player p){
+        if(inRange(p)){
             int dx = this.position.getX()-p.position.getX();
             int dy = this.position.getY()-p.position.getY();
-            if(Math.abs(dx)>Math.abs(dy)){
+            if(dy==0) { // TODO: implement this
                 if(dx>0){
-                    return 'w'; // TODO: Check if it works
+                    return 'w';
                 }
                 else{
                     return 's';
                 }
             }
-
+            else if(dx==0){
+                if(dy<0){
+                    return 'd';
+                }
+                else{
+                    return 'a';
+                }
+            }
+            else if(Math.abs(dx)<Math.abs(dy)){ // BUG: This is not correct
+                if(dx>0){
+                    return 'w';
+                }
+                else{
+                    return 's';
+                }
+            }
             else{
-                if(dy>0){
+                if(dy<0){
                     return 'd';
                 }
                 else{
@@ -45,6 +62,14 @@ public class Monster extends Enemy{
             }
         }
         return ' ';
+    }
+
+    public boolean inRange(Player p){
+        return this.position.range(p.position)<visionRange;
+    }
+
+    public String description(){
+        return super.description() + "     Experience Value: " + this.experience + "     Vision Range: " + this.visionRange;
     }
 
 }

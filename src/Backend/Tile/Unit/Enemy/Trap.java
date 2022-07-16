@@ -32,4 +32,9 @@ public class Trap extends Enemy{
         return ' ';
     }
 
+    public String description(){
+        return super.description() + "     Experience Value: " + this.experience + "    Visibility Time: "
+                + this.visibilityTime + "     Invisibility Time: " + this.invisibilityTime;
+    }
+
 }
