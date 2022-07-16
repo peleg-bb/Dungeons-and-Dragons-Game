@@ -51,13 +51,13 @@ public abstract class Tile implements Comparable<Tile>, PositionObservable {
         this.position = tile.getPosition();
         tile.setPosition(temp);
         // notify observers of position change
-        notifyObservers(this);
-        notifyObservers(tile);
+        notifyObservers(this, tile);
+
     }
 
-    public void notifyObservers(Tile tile){
+    public void notifyObservers(Tile tile, Tile tile2){
         for (PositionObserver observer : observers) {
-            observer.update(tile);
+            observer.update(tile, tile2);
         }
     }
 

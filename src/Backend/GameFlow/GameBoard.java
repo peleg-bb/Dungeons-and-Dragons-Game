@@ -31,7 +31,7 @@ public class GameBoard implements PositionObserver {
                 return t;
             }
         }
-        throw new RuntimeException("Attempting to access a tile which doesn't exist.");
+        throw new RuntimeException("Attempting to access a tile which doesn't exist- x = " + x + " y = " + y);
     }
 
     public void setLevel(List<String> lines){
@@ -145,7 +145,6 @@ public class GameBoard implements PositionObserver {
 
 
     public void createPlayer(int playerChoice, Position playerPosition) {
-
         switch (playerChoice) {
             case 1:
                 this.player = new Warrior("Jon Snow", playerPosition, 300, 30, 4, 3);
@@ -162,7 +161,6 @@ public class GameBoard implements PositionObserver {
 //            case 7:
 //                this.player = new Hunter(playerPosition, "Ygritte", new Health(220), 30, 2, 6);
         }
-
     }
     public void remove(Enemy e) { // Never assigned, might be redundant
         tiles.remove(e);
@@ -188,9 +186,10 @@ public class GameBoard implements PositionObserver {
 
 
     @Override
-    public void update(Tile tile) { // Updates tile postion in board
-        tiles.remove(getTile(tile.getPosition().getX(), tile.getPosition().getY())); // Removes old tile
-        board[tile.getPosition().getX()][tile.getPosition().getY()] = tile; // Updates board with new tile
-        tiles.add(tile); // Adds new tile to list of tiles
+    public void update(Tile tile, Tile tile2) { // Updates tile postion in board
+        Position p = tile.getPosition();
+        Position p2 = tile2.getPosition();
+        board[p.getX()][p.getY()] = tile;
+        board[p2.getX()][p2.getY()] = tile2;
     }
 }

@@ -24,14 +24,14 @@ public class Level {
     }
 
     public void GameTick(char choice) {
-        System.out.println(board.toString()); // print board via message call back and not system.out.println
         player.onGameTick();
         move(choice);
+        System.out.println(board.toString()); // print board via message call back and not system.out.println
         if (player.isDead()){
             player.setMassageCallBack((msg) -> gameOver = true);
         } else {
             for (Enemy e : enemies) {
-                e.onGameTick(player);
+                move(e, e.onGameTick(player));
                 if (e.isDead()) {
                     e.setEnemyDeathCallBack(() -> enemies.remove(e));
                 }
@@ -44,17 +44,32 @@ public class Level {
     public void move(char move) {
         int x = player.getPosition().getX();
         int y = player.getPosition().getY();
-        if (move == 'w') {
+        if (move == 'd') {
             player.visit(board.getTile(x, y + 1));
         }
-        if (move == 's') {
+        if (move == 'a') {
             player.visit(board.getTile(x, y - 1));
-        } else if (move == 'd') {
+        } else if (move == 's') {
             player.visit(board.getTile(x + 1, y));
-        } else if (move == 'a') {
+        } else if (move == 'w') {
             player.visit(board.getTile(x - 1, y));
         } else if (move == 'c') {
             player.onAbilityCast(enemies);
+        }
+    }
+
+    public void move(Enemy enemy, char move){
+        int x = enemy.getPosition().getX();
+        int y = enemy.getPosition().getY();
+        if (move == 'd') {
+            enemy.visit(board.getTile(x, y + 1));
+        }
+        if (move == 'a') {
+            enemy.visit(board.getTile(x, y - 1));
+        } else if (move == 's') {
+            enemy.visit(board.getTile(x + 1, y));
+        } else if (move == 'w') {
+            enemy.visit(board.getTile(x - 1, y));
         }
     }
 }

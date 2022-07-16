@@ -24,9 +24,7 @@ public class UserInterface implements Observer {
         System.out.println("Available players are: ");
         int choice = UI.choosePlayer();
         // read levels from file
-        //List<List<String>> levels = UI.readFiles(args);
-        List<List<String>> levels = UI.makeLevels();
-        //List<List<String>> levels = ""
+        List<List<String>> levels = UI.readFiles(args);
         new GameFlow(choice, levels, UI);
         System.out.println("Game over, Bye bye!");
     }

@@ -11,38 +11,40 @@ public class Monster extends Enemy{
         super(tile,position, name,healthA, attackPoints, defensePoint, expirience);
         this.visionRange = visionRange;
     }
-    public void onGameTick(Player p){
+    public char onGameTick(Player p){ // TODO: Make it visit the tile around rather than just change position!
         if(this.position.range(p.position)<visionRange){
             int dx = this.position.getX()-p.position.getX();
             int dy = this.position.getY()-p.position.getY();
             if(Math.abs(dx)>Math.abs(dy)){
                 if(dx>0){
-                    position.setX(position.getX()-1);
+                    return 'w'; // TODO: Check if it works
                 }
                 else{
-                    position.setX(position.getX()+1);
+                    return 's';
                 }
             }
 
             else{
                 if(dy>0){
-                    position.setY(position.getY()+1);
+                    return 'd';
                 }
                 else{
-                    position.setY(position.getY()-1);
+                    return 'a';
                 }
             }
         }
         else{
-            int move = (int) (Math.random()*(4-0)) + 0;
+            int move = (int) (Math.random() * 5);
+            // generate random integer between 0 and 4
             switch(move){
                 case 0: break;
-                case 1: position.setX(position.getX()-1); break;
-                case 2 : position.setX(position.getX()+1); break;
-                case 3 : position.setY(position.getY()+1); break;
-                case 4 : position.setY(position.getY()-1); break;
+                case 1: return 'w';
+                case 2 : return 's';
+                case 3 : return 'd';
+                case 4 : return 'a';
             }
         }
+        return ' ';
     }
 
 }

@@ -1,6 +1,7 @@
 package Backend.Tile.Unit;
 
 import Backend.Interfaces.MassageCallBack;
+import Backend.Interfaces.Observable;
 import Backend.Tile.StaticTiles.Empty;
 import Backend.Tile.Position;
 import Backend.Tile.Tile;
@@ -10,7 +11,7 @@ import Backend.Tile.StaticTiles.Wall;
 
 public abstract class Unit extends Tile {
     protected String name;
-    public MassageCallBack massageCallBack;
+    protected MassageCallBack massageCallBack; // TODO: Implement this
     protected int experience;
 
     public int getExperience() {
@@ -60,12 +61,12 @@ public abstract class Unit extends Tile {
 
            String msg = this.name + " attacked " + u.name +
                    " and did " + (attackP - defenseP) + " damage";
-           this.setMassageCallBack(new MassageCallBack() {
-               @Override
-               public void send(String m) {
-                   massageCallBack.send(msg);
-               }
-           });
+//           this.setMassageCallBack(new MassageCallBack() {
+//               @Override
+//               public void send(String m) {
+//                   massageCallBack.send(m);
+//               }
+//           });
            if(u.isDead()){
                u.onDeath(this);
                this.onKill(u);
@@ -86,6 +87,9 @@ public abstract class Unit extends Tile {
     public abstract void visit(Player p);
     public void visit(Wall wall){};
     public void visit(Empty empty){ swapPositions(empty);};
+    public void visit(Tile t){
+        t.accept(this);
+    }
 
     public class Health {
         protected int healthPool;

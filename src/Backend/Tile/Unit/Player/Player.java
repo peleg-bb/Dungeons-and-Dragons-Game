@@ -39,16 +39,16 @@ public abstract class Player extends Unit {
     public void accept(Unit u){
         u.visit(this);
     }
-    public void visit(Player p){}
+    public void visit(Player p){
+        System.out.println("Player " + this.name + " is trying to visit Player " + p.name);
+    }
     public void visit(Enemy e){
         super.combat(e);
         if (this.isDead()){
             this.onDeath(e);
         }
     }
-    public void visit(Tile t){
-        t.accept(this);
-    }
+
 
     public void onKill(Unit u){
         this.experience = this.experience + u.getExperience();
@@ -89,6 +89,7 @@ public abstract class Player extends Unit {
 //
 //
 //    }
+
 
 
 }
