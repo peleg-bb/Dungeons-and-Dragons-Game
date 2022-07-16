@@ -63,7 +63,7 @@ public class Mage extends Player{
 
 
     public String description(){
-        return super.toString() + "     Mana: " + currentMana + "/"+ manaPool +
+        return super.description() + "     Mana: " + currentMana + "/"+ manaPool +
                 "     Mana Cost: " + manaCost + "     Spell Power: " + spellPower;
     }
 

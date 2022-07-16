@@ -43,5 +43,9 @@ public class Rogue extends Player{
         }
     }
 
+    public String description(){
+        return super.description() + "      cost: " + this.cost;
+    }
+
 
 }

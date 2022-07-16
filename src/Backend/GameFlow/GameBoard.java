@@ -214,16 +214,22 @@ public class GameBoard implements PositionObserver {
         switch (playerChoice) {
             case 1:
                 this.player = new Warrior("Jon Snow", playerPosition, 300, 30, 4, 3);
+                break;
             case 2:
                 this.player = new Warrior("The Hound", playerPosition, 400, 20, 6, 5);
+                break;
             case 3:
                 this.player = new Mage("Melisandre", playerPosition, 100, 5, 1, 15, 300, 30, 5,6);
+                break;
             case 4:
                 this.player = new Mage("Thoros of Myr", playerPosition, 250, 25, 4, 20, 150, 20, 3, 4);
+                break;
             case 5:
                 this.player = new Rogue("Arya Stark", playerPosition, 150, 40, 2, 20);
+                break;
             case 6:
                 this.player = new Rogue("Bronn", playerPosition, 250, 35, 3, 50);
+                break;
         }
     }
     public void remove(Enemy e) { // Never assigned, might be redundant

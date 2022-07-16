@@ -41,4 +41,8 @@ public class Warrior extends Player{
             }
         }
     }
+
+    public String description(){
+        return super.description() + "      cool down: " + this.remainingCoolDown + "/" + this.abilityCoolDown;
+    }
 }
