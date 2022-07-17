@@ -25,6 +25,7 @@ public class Rogue extends Player{
 
     @Override
     public void onGameTick() {
+        super.onGameTick();
         this.currentEnergy = Math.min(currentEnergy + 10, 100);
     }
 
@@ -33,12 +34,14 @@ public class Rogue extends Player{
         if(currentEnergy<cost){
             massageCallBack.send("Cannot cast ability, not enough energy");
         }
-        this.currentEnergy = this.currentEnergy - this.cost;
-        for(Enemy e : enemies){
-            if(this.position.range(e.position)<2){
-                e.health.setHealthPool(e.health.getHealthPool() - attackPoints);
-                massageCallBack.send("You attacked " + e.getName() + " for " + attackPoints +
-                        " damage using special ability: " + spacialAbility);
+        else {
+            this.currentEnergy = Math.max(this.currentEnergy - this.cost, 0);
+            for (Enemy e : enemies) {
+                if (this.position.range(e.position) < 2) {
+                    e.health.setHealthPool(e.health.getHealthPool() - attackPoints);
+                    massageCallBack.send("You attacked " + e.getName() + " for " + attackPoints +
+                            " damage using special ability: " + spacialAbility);
+                }
             }
         }
     }

@@ -19,11 +19,11 @@ public class Warrior extends Player{
     public void levelUp() {
         super.levelUp();
         this.remainingCoolDown = 0;
-        health.setValues(1,2);//change
-        this.attackPoints = this.attackPoints +2*this.level;
-        this.attackPoints = this.defensePoint +level;
+        this.attackPoints = this.attackPoints + 2*this.level;
+        this.defensePoint = this.defensePoint +level;
     }
     public void onGameTick(){
+        super.onGameTick();
         this.remainingCoolDown = this.remainingCoolDown-1;
     }
     public void onAbilityCast(List<Enemy> enemies){
@@ -33,11 +33,11 @@ public class Warrior extends Player{
         else{
             this.remainingCoolDown = this.abilityCoolDown;
             health.setHealthAmount(Math.min(health.getHealthAmount() + 10*defensePoint,health.getHealthPool()));
-        }
-        for(Enemy e : enemies ){///
-            if(this.position.range(e.position)<3){
-                interact(e);
-                break;
+            for(Enemy e : enemies ){///
+                if(this.position.range(e.position)<3){
+                    interact(e);
+                    break;
+                }
             }
         }
     }
