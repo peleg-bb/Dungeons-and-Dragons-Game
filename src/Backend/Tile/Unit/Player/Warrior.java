@@ -24,7 +24,7 @@ public class Warrior extends Player{
     }
     public void onGameTick(){
         super.onGameTick();
-        this.remainingCoolDown = this.remainingCoolDown-1;
+        this.remainingCoolDown = Math.max(this.remainingCoolDown-1, 0);
     }
     public void onAbilityCast(List<Enemy> enemies){
         if(this.remainingCoolDown>0){
