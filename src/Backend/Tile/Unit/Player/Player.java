@@ -10,11 +10,14 @@ import java.util.List;
 public abstract class Player extends Unit {
     protected int experience;
     protected int level;
+
+    protected int experienceRequired;
     public Player(String name, Position position, int healthA , int attackPoints,
                   int defensePoint){
         super('@', position, name, healthA, attackPoints,
                 defensePoint, 0); //experience is 0 because it is a player
         this.level = 1;
+        experienceRequired = 50*level;
     }
 
     public void setExperience() {
@@ -30,7 +33,8 @@ public abstract class Player extends Unit {
     public void levelUp(){
         this.experience = this.experience - 50*this.level;
         this.level++; // ask
-        health.setValues(this.health.getHealthPool(),this.health.getHealthPool()+10*level);
+        experienceRequired = 50*level;
+        health.setValues(this.health.getHealthPool()+10*level,this.health.getHealthPool()+10*level);
         this.attackPoints = this.attackPoints + 4*this.level;
         this.defensePoint = this.defensePoint + this.level;
     }
@@ -57,14 +61,15 @@ public abstract class Player extends Unit {
     }
     public void onDeath(Unit u){
         this.tile = 'X';
-        this.massageCallBack.send("You died");
         u.onKill(this);
+        this.massageCallBack.send("You died");
         // End game
     }
     public abstract void onAbilityCast(List<Enemy> enemies);
 
     public void onGameTick(){
         this.setExperience();
+        this.massageCallBack.send(description());
     }
 //
 //    public void move(char move, List<Enemy> enemies){ // Do not use this method
@@ -91,7 +96,7 @@ public abstract class Player extends Unit {
 //    }
 
     public String description() {
-        return super.description() + "     Level: " + level + "     Experience: " + experience;
+        return super.description() + "     Level: " + level + "     Experience: " + experience + "/" + experienceRequired;
     }
 
 

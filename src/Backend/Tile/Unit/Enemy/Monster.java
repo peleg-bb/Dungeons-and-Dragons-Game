@@ -15,9 +15,10 @@ public class Monster extends Enemy{
     }
     public char onGameTick(Player p){
         if(inRange(p)){
+
             int dx = this.position.getX()-p.position.getX();
             int dy = this.position.getY()-p.position.getY();
-            if(dy==0) { // TODO: implement this
+            if(dy==0) {
                 if(dx>0){
                     return 'w';
                 }

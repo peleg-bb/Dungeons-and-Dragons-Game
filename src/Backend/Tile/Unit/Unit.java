@@ -104,6 +104,9 @@ public abstract class Unit extends Tile {
 
         public void setHealthAmount(int healthAmount) {
             this.healthAmount = healthAmount;
+            if (this.healthAmount < 0) {
+                this.healthAmount = 0;
+            }
         }
 
         public void setHealthPool(int healthPool) {

@@ -43,21 +43,23 @@ public class Mage extends Player{
         if(currentMana<manaCost){
             massageCallBack.send("Cannot cast ability, not enough energy");
         }
-        this.currentMana = this.currentMana - this.manaCost;
-        int hits = 0 ;
-        List<Enemy> enemy  = new ArrayList<>();
-        for(Enemy e : enemies){
-            if(position.range(e.position) < abilityRange){
-                enemy.add(e);
+        else {
+            this.currentMana = Math.max(this.currentMana - this.manaCost, 0);
+            int hits = 0;
+            List<Enemy> enemy = new ArrayList<>();
+            for (Enemy e : enemies) {
+                if (position.range(e.position) < abilityRange) {
+                    enemy.add(e);
+                }
             }
-        }
-        while(hits<hitsCount & enemy.isEmpty()){
-            int index = (int) (Math.random()*(enemies.size()-0)) + 0;
-            Enemy toAttack = enemy.get(index);
-            toAttack.health.setHealthPool(toAttack.health.getHealthPool() - spellPower);
-            massageCallBack.send("You attacked " + toAttack.getName() + " for " + spellPower +
-                    " damage using special ability: " + spacial_ability);
-            hits = hits + 1;
+            while (hits < hitsCount & enemy.isEmpty()) {
+                int index = (int) (Math.random() * (enemies.size() - 0)) + 0;
+                Enemy toAttack = enemy.get(index);
+                toAttack.health.setHealthPool(toAttack.health.getHealthPool() - spellPower);
+                massageCallBack.send("You attacked " + toAttack.getName() + " for " + spellPower +
+                        " damage using special ability: " + spacial_ability);
+                hits = hits + 1;
+            }
         }
     }
 
