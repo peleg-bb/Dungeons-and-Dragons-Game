@@ -31,6 +31,9 @@ public class Trap extends Enemy{
         }
         return ' ';
     }
+    public void setVisibility(boolean bool){ //for tests
+        this.visible = bool;
+    }
 
     public String description(){
         return super.description() + "     Experience Value: " + this.experience + "    Visibility Time: "
