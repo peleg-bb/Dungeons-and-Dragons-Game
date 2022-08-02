@@ -1,4 +1,6 @@
 package Backend.GameFlow;
+import Backend.Interfaces.Observable;
+import Backend.Interfaces.Observer;
 import Backend.Interfaces.PositionObservable;
 import Backend.Interfaces.PositionObserver;
 import Backend.Tile.StaticTiles.Empty;
@@ -12,15 +14,20 @@ import Backend.Tile.Unit.Player.Mage;
 import Backend.Tile.Unit.Player.Player;
 import Backend.Tile.Unit.Player.Rogue;
 import Backend.Tile.Unit.Player.Warrior;
+import UI.UserInterface;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameBoard implements PositionObserver {
+public class GameBoard implements PositionObserver, Observable {
+    private List<Observer> observers;
     private Tile[][] board;
     public Player player;
     private List<Tile> tiles;
     private List<Enemy> enemies;
-    public GameBoard(){
+    public GameBoard(UserInterface UI) {
+        this.observers = new ArrayList<Observer>();
+        addObserver(UI);
         this.tiles = new ArrayList<>();
         this.enemies = new ArrayList<>();
     }
@@ -36,6 +43,8 @@ public class GameBoard implements PositionObserver {
 
     public void setLevel(List<String> lines){
         board = new Tile[lines.size()][lines.get(0).length()]; // The Board
+        tiles.clear();
+        enemies.clear();
         for (int x = 0 ; x < lines.size(); x++) {
             for (int y = 0; y < lines.get(0).length(); y++) {
                 char tileType = lines.get(x).charAt(y);
@@ -56,7 +65,7 @@ public class GameBoard implements PositionObserver {
                         player.setPosition(new Position(x, y));
                         tiles.add(player);
                         board[x][y] = player;
-                        player.setMassageCallBack((msg) -> System.out.println(msg));
+                        player.setMassageCallBack((msg) -> notifyObservers(msg));
                     }
                     case 's' -> {
                         newEnemy = new Monster('s', new Position(x, y), "Lannister Solider", 80, 8, 3, 25, 3);
@@ -67,7 +76,7 @@ public class GameBoard implements PositionObserver {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
                         });
-                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
+                        newEnemy.setMassageCallBack((msg) -> notifyObservers(msg));
                     }
                     case 'k' -> {
                         newEnemy = new Monster('k', new Position(x, y), "Lannister Knight", 200, 14, 8, 50, 4);
@@ -78,7 +87,7 @@ public class GameBoard implements PositionObserver {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
                         });
-                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
+                        newEnemy.setMassageCallBack((msg) -> notifyObservers(msg));
                     }
                     case 'q' -> {
                         newEnemy = new Monster('q', new Position(x, y), "Queen's Guard", 400, 20, 15, 5, 100);
@@ -89,7 +98,7 @@ public class GameBoard implements PositionObserver {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
                         });
-                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
+                        newEnemy.setMassageCallBack((msg) -> notifyObservers(msg));
                     }
                     case 'z' -> {
                         newEnemy = new Monster('z', new Position(x, y), "Wright", 600, 30, 15, 3, 100);
@@ -100,7 +109,7 @@ public class GameBoard implements PositionObserver {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
                         });
-                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
+                        newEnemy.setMassageCallBack((msg) -> notifyObservers(msg));
                     }
                     case 'b' -> {
                         newEnemy = new Monster('b', new Position(x, y), "Bear-Wright", 1000, 75, 30, 4, 250);
@@ -111,7 +120,7 @@ public class GameBoard implements PositionObserver {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
                         });
-                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
+                        newEnemy.setMassageCallBack((msg) -> notifyObservers(msg));
                     }
                     case 'g' -> {
                         newEnemy = new Monster('g', new Position(x, y), "Giant-Wright", 1500, 100, 40, 5, 500);
@@ -122,7 +131,7 @@ public class GameBoard implements PositionObserver {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
                         });
-                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
+                        newEnemy.setMassageCallBack((msg) -> notifyObservers(msg));
                     }
                     case 'w' -> {
                         newEnemy = new Monster('w', new Position(x, y), "White Walker", 2000, 150, 50, 6, 1000);
@@ -133,7 +142,7 @@ public class GameBoard implements PositionObserver {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
                         });
-                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
+                        newEnemy.setMassageCallBack((msg) -> notifyObservers(msg));
                     }
                     case 'M' -> {
                         newEnemy = new Monster('M', new Position(x, y), "The Mountain", 1000, 60, 25, 6, 500);
@@ -144,7 +153,7 @@ public class GameBoard implements PositionObserver {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
                         });
-                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
+                        newEnemy.setMassageCallBack((msg) -> notifyObservers(msg));
                     }
                     case 'C' -> {
                         newEnemy = new Monster('C', new Position(x, y), "Queen Cersei", 100, 10, 10, 1, 1000);
@@ -155,7 +164,7 @@ public class GameBoard implements PositionObserver {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
                         });
-                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
+                        newEnemy.setMassageCallBack((msg) -> notifyObservers(msg));
                     }
                     case 'K' -> {
                         newEnemy = new Monster('K', new Position(x, y), "Knight's King", 5000, 300, 150, 8, 5000);
@@ -166,7 +175,7 @@ public class GameBoard implements PositionObserver {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
                         });
-                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
+                        newEnemy.setMassageCallBack((msg) -> notifyObservers(msg));
                     }
                     case 'B' -> {
                         newEnemy = new Trap('B', new Position(x, y), "Bonus Trap", 1, 1, 1, 250, 1, 5);
@@ -177,7 +186,7 @@ public class GameBoard implements PositionObserver {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
                         });
-                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
+                        newEnemy.setMassageCallBack((msg) -> notifyObservers(msg));
                     }
                     case 'Q' -> {
                         newEnemy = new Trap('Q', new Position(x, y), "Queen's Trap", 250, 50, 10, 100, 3, 7);
@@ -188,7 +197,7 @@ public class GameBoard implements PositionObserver {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
                         });
-                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
+                        newEnemy.setMassageCallBack((msg) -> notifyObservers(msg));
                     }
                     case 'D' -> {
                         newEnemy = new Trap('D', new Position(x, y), "Death Trap", 500, 100, 20, 250, 1, 10);
@@ -199,7 +208,7 @@ public class GameBoard implements PositionObserver {
                             enemies.remove(newEnemy);
                             remove(newEnemy);
                         });
-                        newEnemy.setMassageCallBack((msg) -> System.out.println(msg));
+                        newEnemy.setMassageCallBack((msg) -> notifyObservers(msg));
                     }
                 }
             }
@@ -262,5 +271,39 @@ public class GameBoard implements PositionObserver {
         Position p2 = tile2.getPosition();
         board[p.getX()][p.getY()] = tile;
         board[p2.getX()][p2.getY()] = tile2;
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        if (!observers.contains(o)){
+            observers.add(o);
+        }
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+
+    }
+
+    @Override
+    public void notifyObservers(char choice) {
+
+    }
+
+    @Override
+    public void notifyObservers(int choice) {
+
+    }
+
+    @Override
+    public void notifyObservers(List<List<String>> lines) {
+
+    }
+
+    @Override
+    public void notifyObservers(String msg) {
+        for (Observer o : observers){
+            o.sendMessage(msg);
+        }
     }
 }

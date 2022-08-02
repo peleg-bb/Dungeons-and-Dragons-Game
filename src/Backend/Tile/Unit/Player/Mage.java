@@ -46,7 +46,7 @@ public class Mage extends Player{
         else {
             this.currentMana = Math.max(this.currentMana - this.manaCost, 0);
             int hits = 0;
-            List<Enemy> enemy = new ArrayList<>();
+            List<Enemy> enemy = new ArrayList<>(); // BUG:
             for (Enemy e : enemies) {
                 if (position.range(e.position) < abilityRange) {
                     enemy.add(e);

@@ -42,10 +42,7 @@ public abstract class Player extends Unit {
     public void accept(Unit u){
         u.visit(this);
     }
-    public void visit(Player p){
-        System.out.println("Player " + this.name + " is trying to visit Player " + p.name);
-        // Should never be instantiated, used as a warning that something went wrong
-    }
+    public void visit(Player p){}
     public void visit(Enemy e){
         super.combat(e);
         if (this.isDead()){
@@ -62,7 +59,7 @@ public abstract class Player extends Unit {
     public void onDeath(Unit u){
         this.tile = 'X';
         u.onKill(this);
-        this.massageCallBack.send("You died");
+        this.massageCallBack.send("You died. Game Over!");
         // End game
     }
     public abstract void onAbilityCast(List<Enemy> enemies);
