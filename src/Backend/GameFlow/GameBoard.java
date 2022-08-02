@@ -36,6 +36,8 @@ public class GameBoard implements PositionObserver {
 
     public void setLevel(List<String> lines){
         board = new Tile[lines.size()][lines.get(0).length()]; // The Board
+        tiles.clear();
+        enemies.clear();
         for (int x = 0 ; x < lines.size(); x++) {
             for (int y = 0; y < lines.get(0).length(); y++) {
                 char tileType = lines.get(x).charAt(y);
