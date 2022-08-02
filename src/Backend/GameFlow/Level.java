@@ -1,20 +1,28 @@
 package Backend.GameFlow;
+import Backend.Interfaces.Observable;
+import Backend.Interfaces.Observer;
 import Backend.Tile.StaticTiles.Empty;
 import Backend.Tile.Unit.Enemy.Enemy;
 import Backend.Tile.Unit.Player.Player;
 import Backend.Tile.Position;
 import Backend.Tile.Tile;
+
+import java.util.ArrayList;
 import java.util.List;
+import UI.UserInterface;
 
 
-public class Level {
+public class Level implements Observable {
+    private List<Observer> observers;
     private Player player;
     private List<Enemy> enemies;
     private GameBoard board;
     public boolean gameOver;
     public boolean done;
 
-    public Level(GameBoard board) {
+    public Level(GameBoard board, UserInterface UI) {
+        this.observers = new ArrayList<Observer>();
+        addObserver(UI);
         this.board = board;
         this.player = board.player;
         this.enemies = board.getEnemies();
@@ -28,7 +36,7 @@ public class Level {
         for (Enemy e : enemies) {
             move(e, e.onGameTick(player));
             if (player.isDead()) {
-                System.out.println(board.toString());// TODO: print board via message call back and not system.out.println
+                notifyObservers(board.toString());
                 gameOver = true;
                 done = true;
                 return;
@@ -39,7 +47,7 @@ public class Level {
             return;
         }
 
-        System.out.println(board.toString());
+        notifyObservers(board.toString());
     }
     public void move(char move) {
         int x = player.getPosition().getX();
@@ -70,6 +78,40 @@ public class Level {
             enemy.visit(board.getTile(x + 1, y));
         } else if (move == 'w') {
             enemy.visit(board.getTile(x - 1, y));
+        }
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        if (!observers.contains(o)){
+            observers.add(o);
+        }
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+
+    }
+
+    @Override
+    public void notifyObservers(char choice) {
+
+    }
+
+    @Override
+    public void notifyObservers(int choice) {
+
+    }
+
+    @Override
+    public void notifyObservers(List<List<String>> lines) {
+
+    }
+
+    @Override
+    public void notifyObservers(String msg) {
+        for (Observer o : observers){
+            o.sendMessage(msg);
         }
     }
 }

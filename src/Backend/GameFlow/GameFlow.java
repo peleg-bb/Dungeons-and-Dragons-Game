@@ -21,17 +21,21 @@ public class GameFlow implements Observable {
         this.observers = new ArrayList<Observer>();
         this.addObserver(UI);
         this.levels = levels;
-        GameBoard gameBoard = new GameBoard();
+        GameBoard gameBoard = new GameBoard(UI);
         gameBoard.createPlayer(playerChoice, new Position(0, 0));
         int i = 0;
         while (i < levels.size()) {
             while (!gameOver) {
                 String currentLevelName = "Current level: " + currentLevelIndex;
                 currentLevelIndex++;
+                if(currentLevelIndex >= levels.size()) {
+                    notifyObservers("Game over, you won!!");
+                    gameOver = true;
+                    break;
+                }
                 notifyObservers(currentLevelName);
-                // TODO: Check if bug is here
                 gameBoard.setLevel(levels.get(i));
-                Level currentLevel = new Level(gameBoard);
+                Level currentLevel = new Level(gameBoard, UI);
                 notifyObservers(gameBoard.toString());
                 while (!currentLevel.done) {
                     if (currentLevel.gameOver) {
